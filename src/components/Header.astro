@@ -209,7 +209,7 @@ import UserButton from "./UserButton.vue";
     min-width: 9rem;
     padding: 0.4rem;
     border-radius: 0.9rem;
-    background: var(--accent-bg);
+    background: var(--surface);
     box-shadow: var(--shadow);
     backdrop-filter: blur(14px);
     opacity: 0;
@@ -224,15 +224,16 @@ import UserButton from "./UserButton.vue";
   }
 
   nav :global(.submenu a) {
-  padding: 0.5rem 0.65rem;
-  border-radius: 0.55rem;
-  font-size: 0.88rem;
-  white-space: nowrap;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.55rem;
+    font-size: 0.88rem;
+    white-space: nowrap;
   }
 
-  nav :global(.submenu a:hover) {
-  color: var(--accent);
-  background: var(--accent-bg);
+  nav :global(.submenu a:hover),
+  nav :global(.submenu a:focus-visible) {
+    color: var(--ink);
+    background: var(--bg-raised);
   }
 
 

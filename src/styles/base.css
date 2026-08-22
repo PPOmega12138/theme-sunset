@@ -6,9 +6,9 @@
   --ink-2: #735365;
   --ink-3: #a17b91;
   --rule: #eacbdc;
-  --accent-soft: #efb18b;
-  --accent-bg: #f7dcc8;
-  --sunset: #dc7d3f;
+  --accent-soft: color-mix(in srgb, var(--accent) 28%, transparent);
+  --accent-bg: color-mix(in srgb, var(--accent) 14%, var(--bg-raised));
+  --sunset: color-mix(in srgb, var(--accent) 82%, var(--ink));
   --shadow: 0 8px 24px rgb(106 47 77 / 10%);
   --shadow-float: 0 18px 48px rgb(106 47 77 / 16%);
   --background-pattern: radial-gradient(
@@ -31,9 +31,9 @@ html.dark {
   --ink-3: #b88fa8;
   --rule: #513948;
   --accent: #f09a57;
-  --accent-soft: #70452d;
-  --accent-bg: #382a21;
-  --sunset: #ffc078;
+  --accent-soft: color-mix(in srgb, var(--accent) 38%, transparent);
+  --accent-bg: color-mix(in srgb, var(--accent) 24%, var(--bg-raised));
+  --sunset: color-mix(in srgb, var(--accent) 82%, var(--ink));
   --shadow: 0 8px 24px rgb(0 0 0 / 20%);
   --shadow-float: 0 18px 48px rgb(0 0 0 / 32%);
 }

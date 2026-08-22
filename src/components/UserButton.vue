@@ -251,16 +251,22 @@ onUnmounted(()=>{
 }
 
 .user-menu--dropdown a:hover,
-.user-menu--dropdown a:focus-visible {
+.user-menu--dropdown a:focus-visible
+{
   outline: none;
-  background: var(--accent-bg);
-  color: var(--accent);
+  background: var(--bg-raised);
+  color: var(--ink);
 }
 
 .user-menu--logout {
   margin-top: 0.25rem;
   border-top: 1px solid var(--rule);
-  color: var(--ink-2) !important;
+}
+
+.user-menu--logout:hover{
+  outline: none;
+  background: var(--bg-raised);
+  color: var(--ink);
 }
 
 @keyframes shimmer {
