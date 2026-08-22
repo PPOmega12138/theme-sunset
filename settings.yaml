@@ -21,7 +21,7 @@ spec:
         - $formkit: color
           name: accent_color
           label: "强调色"
-          value: "#cf713c"
+          value: "#c43d83"
     - group: index
       label: "首页设置"
       formSchema:

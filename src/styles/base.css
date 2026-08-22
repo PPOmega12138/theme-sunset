@@ -1,17 +1,16 @@
 :root {
-  --bg: #fffdfa;
-  --bg-raised: #fff6ed;
-  --surface: rgb(255 253 250 / 78%);
-  --ink: #33261e;
-  --ink-2: #755c4b;
-  --ink-3: #a68d7b;
-  --rule: #eadbd0;
-  --accent: #cf713c;
-  --accent-soft: #f5c6a5;
-  --accent-bg: #fff0e4;
-  --sunset: #e59a52;
-  --shadow: 0 8px 24px rgb(92 55 29 / 8%);
-  --shadow-float: 0 18px 48px rgb(92 55 29 / 14%);
+  --bg: #f7eaf1;
+  --bg-raised: #fff1f8;
+  --surface: rgb(255 245 251 / 80%);
+  --ink: #3d2636;
+  --ink-2: #735365;
+  --ink-3: #a17b91;
+  --rule: #eacbdc;
+  --accent-soft: #efb18b;
+  --accent-bg: #f7dcc8;
+  --sunset: #dc7d3f;
+  --shadow: 0 8px 24px rgb(106 47 77 / 10%);
+  --shadow-float: 0 18px 48px rgb(106 47 77 / 16%);
   --background-pattern: radial-gradient(
     circle,
     color-mix(in srgb,var(--accent) 14%,transparent) 1px,transparent 1.15px
@@ -24,13 +23,13 @@
 }
 
 html.dark {
-  --bg: #1d1a17;
-  --bg-raised: #29231f;
-  --surface: rgb(39 34 30 / 82%);
-  --ink: #fff4ea;
-  --ink-2: #dfc4ad;
-  --ink-3: #a98f7b;
-  --rule: #4c4038;
+  --bg: #211820;
+  --bg-raised: #30212e;
+  --surface: rgb(48 32 45 / 82%);
+  --ink: #fff0fa;
+  --ink-2: #e1bfd2;
+  --ink-3: #b88fa8;
+  --rule: #513948;
   --accent: #f09a57;
   --accent-soft: #70452d;
   --accent-bg: #382a21;
@@ -53,8 +52,8 @@ body {
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(circle at 8% -10%, rgb(242 164 92 / 26%), transparent 27rem),
-    radial-gradient(circle at 96% 4%, rgb(235 125 68 / 18%), transparent 24rem),
+    radial-gradient(circle at 8% -10%, rgb(255 102 187 / 17%), transparent 27rem),
+    radial-gradient(circle at 96% 4%, rgb(218 91 161 / 11%), transparent 24rem),
     var(--background-pattern) 0 0 / var(--background-pattern-size),
     var(--bg);
   color: var(--ink);
@@ -83,7 +82,7 @@ body {
 }
 
 .site-background::before{
-  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
 }
 
 .site-background::after{
