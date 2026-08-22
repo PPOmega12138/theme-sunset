@@ -1,0 +1,97 @@
+<footer>
+  <div class="footer-inner">
+    <div class="footer-line">
+      <p class="copyright">
+          &copy;
+          <span th:text="${#temporals.year(#temporals.createNow())}">2026</span>
+          <span th:text="${site.title}">Site title</span>
+      </p>
+
+      <p class="footer-credit">
+        Powered by <a href="https://www.halo.run/" rel="noopener">Halo</a>
+        <span aria-hidden="true">·</span>
+        Themed by <a href="https://github.com/PPOmega12138" rel="noopener">PP_Omega</a>
+      </p>
+    </div>
+
+    <div 
+      class="footer-records"
+      th:if="${not #strings.isEmpty(theme.config.footer.icp) or not #strings.isEmpty(theme.config.footer.public_security)}"  
+    >
+      <div
+        class="footer-record"
+        th:if="${not #strings.isEmpty(theme.config.footer.icp)}"
+      >
+        <a
+          class="footer-record"
+          th:text="${theme.config.footer.icp}"
+          target="_blank"
+          href="https://beian.miit.gov.cn/"
+        ></a>
+      </div>
+      <div
+        class="footer-record"
+        th:if="${not #strings.isEmpty(theme.config.footer.public_security)}"
+      >
+        <a
+          class="footer-record"
+          th:text="${theme.config.footer.public_security}"
+          target="_blank"
+          href="https://beian.gov.cn/"
+        ></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<halo:footer />
+
+<style>
+  footer {
+    background: var(--bg);
+  }
+
+  .footer-inner {
+    display: grid;
+    justify-items: center;
+    gap: 0.65rem;
+    text-align: center;
+    width: 820px;
+    max-width: calc(100% - 2.5rem);
+    margin: 0 auto;
+    padding: 2rem 0;
+    color: var(--ink-3);
+    font-size: 0.88rem;
+  }
+
+  .footer-line, .footer-records{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .footer-line p{
+    margin: 0;
+  }
+
+  .footer-record + .footer-record::before{
+    content: "·";
+    margin-right: 0.5rem;
+    color:var(--ink-3);
+  }
+
+  .footer-credit a, 
+  .footer-records a{
+    color: var(--ink-3);
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .footer-credit a:hover,
+  .footer-records a:hover {
+    color: var(--accent);
+  }
+</style>
