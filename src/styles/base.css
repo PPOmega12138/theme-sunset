@@ -52,8 +52,6 @@ body {
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(circle at 8% -10%, rgb(255 102 187 / 17%), transparent 27rem),
-    radial-gradient(circle at 96% 4%, rgb(218 91 161 / 11%), transparent 24rem),
     var(--background-pattern) 0 0 / var(--background-pattern-size),
     var(--bg);
   color: var(--ink);
