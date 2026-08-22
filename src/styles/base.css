@@ -1,7 +1,7 @@
 :root {
   --bg: #fffdfa;
   --bg-raised: #fff6ed;
-  --surface: rgb(255 253 250 / 86%);
+  --surface: rgb(255 253 250 / 78%);
   --ink: #33261e;
   --ink-2: #755c4b;
   --ink-3: #a68d7b;
@@ -10,7 +10,13 @@
   --accent-soft: #f5c6a5;
   --accent-bg: #fff0e4;
   --sunset: #e59a52;
-  --shadow: 0 20px 60px rgb(92 55 29 / 10%);
+  --shadow: 0 8px 24px rgb(92 55 29 / 8%);
+  --shadow-float: 0 18px 48px rgb(92 55 29 / 14%);
+  --background-pattern: radial-gradient(
+    circle,
+    color-mix(in srgb,var(--accent) 14%,transparent) 1px,transparent 1.15px
+  );
+  --background-pattern-size:25px 25px;
   --black: 51, 38, 30;
   --gray: 117, 92, 74;
   --gray-light: 234, 219, 208;
@@ -20,7 +26,7 @@
 html.dark {
   --bg: #1d1a17;
   --bg-raised: #29231f;
-  --surface: rgb(39 34 30 / 88%);
+  --surface: rgb(39 34 30 / 82%);
   --ink: #fff4ea;
   --ink-2: #dfc4ad;
   --ink-3: #a98f7b;
@@ -29,7 +35,8 @@ html.dark {
   --accent-soft: #70452d;
   --accent-bg: #382a21;
   --sunset: #ffc078;
-  --shadow: 0 20px 60px rgb(0 0 0 / 28%);
+  --shadow: 0 8px 24px rgb(0 0 0 / 20%);
+  --shadow-float: 0 18px 48px rgb(0 0 0 / 32%);
 }
 *,
 *::before,
@@ -48,6 +55,7 @@ body {
   background:
     radial-gradient(circle at 8% -10%, rgb(242 164 92 / 26%), transparent 27rem),
     radial-gradient(circle at 96% 4%, rgb(235 125 68 / 18%), transparent 24rem),
+    var(--background-pattern) 0 0 / var(--background-pattern-size),
     var(--bg);
   color: var(--ink);
   font-size: 17px;
@@ -55,6 +63,39 @@ body {
   -webkit-font-smoothing: antialiased;
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+.site-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.site-background::before,
+.site-background::after{
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.site-background::before{
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+}
+
+.site-background::after{
+  background-image: var(--background-pattern);
+  background-size: var(--background-pattern-size);
+}
+
+body > header,
+body > main,
+body > footer{
+  position: relative;
+  z-index: 1;
 }
 
 main {
@@ -178,11 +219,11 @@ hr {
   display: grid;
   gap: 2.5rem;
   padding: clamp(1.5rem, 4vw, 3rem);
-  border: 1px solid rgb(255 255 255 / 60%);
   border-radius: 1.75rem;
   background: var(--surface);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .page-heading {

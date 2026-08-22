@@ -6,6 +6,14 @@ import Layout from "../layouts/Layout.astro";
   <Fragment slot="head">
     <title th:text="${site.title}"></title>
   </Fragment>
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(theme.config.index.background_image)}"
+      th:style="'background-image: url('+ ${theme.config.index.background_image}+');'"
+    ></div>
+  </Fragment>
 
   <th:block th:replace="~{fragments/post-list}"></th:block>
 

@@ -18,7 +18,7 @@ const hasHeading = Boolean(pageTitle);
   lang="en"
   class="theme-sunset"
   th:attr="data-default-theme=${theme.config.appearance.color_scheme}"
-  th:style="|--accent:${theme.config.appearance.accent_color ?: '#c95572'}|"
+  th:style="|--accent:${theme.config.appearance.accent_color ?: '#cf713c'}|"
 >
   <head>
     <meta charset="utf-8" />
@@ -43,6 +43,7 @@ const hasHeading = Boolean(pageTitle);
     <slot name="head" />
   </head>
   <body>
+    <slot name="background" />
     <Header />
     <main class="layout-main">
       <article class="page-shell">

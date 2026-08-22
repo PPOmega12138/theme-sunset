@@ -22,6 +22,16 @@ spec:
           name: accent_color
           label: "强调色"
           value: "#cf713c"
+    - group: index
+      label: "首页设置"
+      formSchema:
+        - $formkit: attachment
+          name: background_image
+          label: "首页背景图"
+          accepts: 
+            - image/*
+          help: "建议使用横向图片，宽度至少1920px"
+
     - group: footer
       label: "页脚"
       formSchema:
