@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/index.css"
 ---
 
-<Layout>
+<Layout contentClass="homepage">
   <Fragment slot="head">
     <title th:text="${site.title}"></title>
   </Fragment>
@@ -15,25 +16,127 @@ import Layout from "../layouts/Layout.astro";
     ></div>
   </Fragment>
 
-  <th:block th:replace="~{fragments/post-list}"></th:block>
 
-  <nav
-    th:if="${posts.totalPages gt 1}"
-    class="pagination"
-    aria-label="Pagination"
-  >
-    <a
-      th:if="${posts.hasPrevious()}"
-      th:href="@{${posts.prevUrl}}"
-      class="pagination__prev">&larr; 较新</a
+  <section class="index-board" aria-label="homepage">
+    <section class="index-card index-card--welcome">
+
+      <div class="index-welcome--content">
+        <p
+          class="index-welcome--content index-welcome--content-1"
+          th:text="${#strings.isEmpty(theme.config.index.welcome_content_1) ? '写点东西' : theme.config.index.welcome_content_1}"
+        >
+        写点东西
+        </p>
+        <p
+          class="index-welcome--content index-welcome--content-2"
+          th:text="${#strings.isEmpty(theme.config.index.welcome_content_2) ? '留给未来的自己' : theme.config.index.welcome_content_2} "
+        >
+          留给未来的自己
+        </p>
+        <p class="index-card--sitename">
+          WELCOME TO 
+          <span 
+            th:text="${site.title}"
+            class="index-card--sitetitle"
+          >Sunset</span>
+        </p>
+
+      </div>
+      <div
+        class="index-welcome--image"
+        th:if="${not #strings.isEmpty(theme.config.index.welcome_image)}"
+      >
+        <img
+          th:src="${theme.config.index.welcome_image}"
+          alt=""
+          loading="eager"
+        />
+      </div>
+    </section> 
+    
+    <section class="index-card index-card--recent" aria-labelledby="recent-notes-title">
+      <div class="index-card--heading">
+        <p class="index-card--eyebrow">RECENT NOTES</p>
+        <h2 id="recent-notes-title">最近文章</h2>
+      </div>
+
+      <div
+        class="index-recent--list"
+        th:if="${not #lists.isEmpty(posts.items)}"
+      >
+        <div
+          class="index-recent--item"
+          th:each="post,postStat : ${posts.items}"
+          th:if="${postStat.index lt 3}"
+        >
+          <a th:href="@{${post.status.permalink}}"             th:if="${not #strings.isEmpty(post.spec.cover)}">
+            <img
+            class="index-recent--image"
+            th:src="${post.spec.cover}"
+            alt=""
+            loading="lazy"
+            />
+          </a>
+          <div class="index-recent--info">
+            <a th:href="@{${post.status.permalink}}">
+              <p
+              class="index-recent--title"
+              th:text="${post.spec.title}"
+              >文章标题</p>
+              <p
+              class="index-recent--excerpt"
+              th:text="${post.status.excerpt}"
+              >摘要</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <p
+        class="index-card--empty"
+        th:if="${#lists.isEmpty(posts.items)}"
+      >
+        还没有发布文章。
+      </p>
+    </section>
+
+    <section
+      class="index-card index-card--stats"
+      th:with="stats = ${siteStatsFinder.getStats()}"
+      aria-labelledby="site-stats-title"
     >
-    <span
-      class="pagination__info"
-      th:text="|${posts.page} / ${posts.totalPages}|"></span>
-    <a
-      th:if="${posts.hasNext()}"
-      th:href="@{${posts.nextUrl}}"
-      class="pagination__next">较旧 &rarr;</a
-    >
-  </nav>
+      <p class="index-card--eyebrow">SITE STATS</p>
+      <h2 id="site-stats-title">站点信息</h2>
+
+      <dl class="index-stats">
+        <div>
+          <dt>文章</dt>
+          <dd th:text="${stats.post}">0</dd>
+        </div>
+        <div>
+          <dt>分类</dt>
+          <dd th:text="${stats.category}">0</dd>
+        </div>
+        <div>
+          <dt>访问</dt>
+          <dd th:text="${stats.visit}">0</dd>
+        </div>
+      </dl>
+    </section>
+
+    <a class="index-card index-card--moments" th:href="@{/moments}">
+      <p class="index-card--eyebrow">MOMENTS</p>
+      <h2>动态</h2>
+      <span>最近发生了什么&nbsp; →</span>
+    </a>
+
+    <a class="index-card index-card--archives" th:href="@{${site.routes.archivesUri}}">
+      <p class="index-card--eyebrow">ALL NOTES</p>
+      <h2>全部文章</h2>
+      <span>看看所有的文章&nbsp;→</span>
+    </a>
+
+
+
+  </section>
 </Layout>

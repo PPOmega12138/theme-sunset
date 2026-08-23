@@ -210,22 +210,12 @@ hr {
   border-top: 1px solid var(--rule);
 }
 
-/* ─── Page shell ─────────────────────────────────── */
 
-.page-shell {
-  display: grid;
-  gap: 2.5rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  border-radius: 1.75rem;
-  background: var(--surface);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
 
 .page-heading {
   padding-bottom: 1.75rem;
   border-bottom: 1px solid var(--rule);
+  margin-bottom: 2rem;
 }
 
 .page-heading h1 {
@@ -253,10 +243,6 @@ hr {
   main {
     max-width: calc(100% - 2rem);
     padding: 2rem 0 4rem;
-  }
-
-  .page-shell {
-    border-radius: 1.25rem;
   }
 
   h1 {

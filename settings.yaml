@@ -32,6 +32,25 @@ spec:
             - image/*
           help: "建议使用横向图片，宽度至少1920px"
 
+        - $formkit: attachment
+          name: welcome_image
+          label: 首页欢迎图片
+          accepts:
+            - image/*
+          help: 建议使用横向图片或正方形图片
+
+        - $formkit: text
+          name: welcome_content_1
+          label: 欢迎语第一行
+          value: ""
+          placeholder: 写点东西
+
+        - $formkit: text
+          name: welcome_content_2
+          label: 欢迎语第二行
+          value: ""
+          placeholder: 留给未来的自己
+
     - group: footer
       label: "页脚"
       formSchema:

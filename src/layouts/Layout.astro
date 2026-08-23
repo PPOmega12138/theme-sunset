@@ -46,7 +46,6 @@ const hasHeading = Boolean(pageTitle);
     <slot name="background" />
     <Header />
     <main class="layout-main">
-      <article class="page-shell">
         {
           hasHeading && (
             <header class="page-heading">
@@ -57,7 +56,6 @@ const hasHeading = Boolean(pageTitle);
         <div class:list={["page-content", contentClass]}>
           <slot />
         </div>
-      </article>
     </main>
     <Footer />
   </body>
