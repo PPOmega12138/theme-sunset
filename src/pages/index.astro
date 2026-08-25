@@ -90,6 +90,13 @@ import "../styles/index.css"
             </a>
           </div>
         </div>
+
+        <a class="index-card  index-card--archives" th:href="@{${site.routes.archivesUri}}">
+          <p class="index-card--eyebrow">ALL NOTES</p>
+          <h2>全部文章</h2>
+          <span>看看所有的文章&nbsp;→</span>
+        </a>
+
       </div>
 
       <p
@@ -130,13 +137,6 @@ import "../styles/index.css"
       <span>最近发生了什么&nbsp; →</span>
     </a>
 
-    <a class="index-card index-card--archives" th:href="@{${site.routes.archivesUri}}">
-      <p class="index-card--eyebrow">ALL NOTES</p>
-      <h2>全部文章</h2>
-      <span>看看所有的文章&nbsp;→</span>
-    </a>
-
-
-
+    
   </section>
 </Layout>
