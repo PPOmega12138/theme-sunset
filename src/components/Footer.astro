@@ -6,12 +6,6 @@
           <span th:text="${#temporals.year(#temporals.createNow())}">2026</span>
           <span th:text="${site.title}">Site title</span>
       </p>
-
-      <p class="footer-credit">
-        Powered by <a href="https://www.halo.run/" rel="noopener">Halo</a>
-        <span aria-hidden="true">·</span>
-        Themed by <a href="https://github.com/PPOmega12138" rel="noopener">PP_Omega</a>
-      </p>
     </div>
 
     <div 
@@ -41,15 +35,21 @@
         ></a>
       </div>
     </div>
+
+    <div class="footer-line">
+      <p class="footer-credit">
+        Powered by <a href="https://www.halo.run/" rel="noopener">Halo</a>
+        <span aria-hidden="true">·</span>
+        Themed by <a href="https://github.com/PPOmega12138" rel="noopener">PP_Omega</a>
+      </p>
+    </div>
   </div>
 </footer>
 <halo:footer />
 
 <style>
   footer {
-    background: color-mix(in srgb, var(--bg) 70%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: transparent;
   }
 
   .footer-inner {
@@ -79,17 +79,21 @@
 
   .footer-record + .footer-record::before{
     content: "·";
-    margin-right: 0.5rem;
+    margin-right: 0rem;
     color:var(--ink-3);
   }
 
-  .footer-credit a, 
+  .footer-credit a,
   .footer-records a{
     color: var(--ink-3);
     text-decoration: none;
     transition:
       color 0.15s ease,
       border-color 0.15s ease;
+  }
+
+  .footer-credit {
+    font-size: 0.75rem;
   }
 
   .footer-credit a:hover,
