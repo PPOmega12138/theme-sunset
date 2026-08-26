@@ -56,10 +56,11 @@ import "../styles/index.css"
     
     <section 
       class="index-card index-card--motto"
-      th:if="${not #strings.isEmpty(theme.config.index.motto)}"
+      
     >
       <div
         class="index-motto--content"
+        th:if="${not #strings.isEmpty(theme.config.index.motto)}"
       >
         <p
           th:text="${theme.config.index.motto}"

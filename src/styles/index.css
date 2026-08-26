@@ -390,7 +390,7 @@ a.index-card:focus-visible,
 .index-stats dd{
     margin: 0.15rem 0 0;
     color: var(--accent);
-    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-family: "Nunito", "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;;
     font-size: 1.55rem;
     font-weight: 700;
 }
