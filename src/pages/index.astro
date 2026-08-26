@@ -58,6 +58,32 @@ import "../styles/index.css"
       class="index-card index-card--motto"
       
     >
+      <div class="index-motto--dates">
+
+        <svg
+          class="index-motto--calendar"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+        <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+        <path d="M16 2v4"></path>
+        <path d="M8 2v4"></path>
+        <path d="M3 10h18"></path>
+        </svg>
+
+        <time class="index-motto--date" id="current-date"></time>
+        <span class="index-motto--weekday" id="current-weekday"></span>
+      </div>
+
+
       <div
         class="index-motto--content"
         th:if="${not #strings.isEmpty(theme.config.index.motto)}"
@@ -165,3 +191,30 @@ import "../styles/index.css"
     
   </section>
 </Layout>
+
+<script>
+  const dateElement = document.querySelector("#current-date")
+  const weekdayElement = document.querySelector("#current-weekday")
+
+  if (dateElement && weekdayElement){
+    const now = new Date()
+
+    const dateText = new Intl.DateTimeFormat("zh-CN",{
+      month:"long",
+      day:"numeric",
+    }).format(now);
+
+    const weekdayText = new Intl.DateTimeFormat("zh-CN",{
+      weekday:"long"
+    }).format(now);
+
+    dateElement.dateTime = [
+      now.getFullYear(),
+      String(now.getMonth()+1).padStart(2,"0"),
+      String(now.getDate()).padStart(2,"0"),
+    ].join("-");
+
+    dateElement.textContent = dateText;
+    weekdayElement.textContent = weekdayText;
+  }
+</script>
