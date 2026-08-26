@@ -22,6 +22,7 @@ spec:
           name: accent_color
           label: "强调色"
           value: "#c43d83"
+          
     - group: index
       label: "首页设置"
       formSchema:
@@ -50,6 +51,12 @@ spec:
           label: 欢迎语第二行
           value: ""
           placeholder: 留给未来的自己
+
+        - $formkit: text
+          name: motto
+          label: 首页一句话,留空则不显示
+          value: ""
+
 
     - group: footer
       label: "页脚"

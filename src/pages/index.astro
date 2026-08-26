@@ -54,6 +54,20 @@ import "../styles/index.css"
       </div>
     </section> 
     
+    <section 
+      class="index-card index-card--motto"
+      th:if="${not #strings.isEmpty(theme.config.index.motto)}"
+    >
+      <div
+        class="index-motto--content"
+      >
+        <p
+          th:text="${theme.config.index.motto}"
+        >a motto here</p>
+      </div>
+
+    </section>
+
     <section class="index-card index-card--recent" aria-labelledby="recent-notes-title">
       <div class="index-card--heading">
         <p class="index-card--eyebrow">RECENT NOTES</p>
@@ -78,6 +92,16 @@ import "../styles/index.css"
             />
           </a>
           <div class="index-recent--info">
+            <a
+              th:if="${not #lists.isEmpty(post.categories)}"
+              th:href="@{${post.categories[0].status.permalink}}"
+            >
+              <p
+                class="index-recent--categories"
+                th:text="${post.categories[0].spec.displayName}"
+                >分类</p>
+            </a>
+
             <a th:href="@{${post.status.permalink}}">
               <p
               class="index-recent--title"
