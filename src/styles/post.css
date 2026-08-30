@@ -58,6 +58,10 @@
   font-size: 1.05rem;
 }
 
+.post-content blockquote a{
+  text-decoration: none !important;
+}
+
 .post-content blockquote > :first-child {
   margin-top: 0;
 }
