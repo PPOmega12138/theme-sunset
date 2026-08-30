@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/post.css"
 ---
 
 <Layout contentClass="prose">
@@ -7,15 +8,36 @@ import Layout from "../layouts/Layout.astro";
     <title th:text="|${post.spec.title} - ${site.title}|"></title>
   </Fragment>
 
-  <div class="page-heading">
-    <h1 th:text="${post.spec.title}"></h1>
-    <p class="page-meta">
-      <span th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
-      ></span>
-    </p>
-  </div>
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(post.spec.cover)}"
+      th:style="'background-image: url('+ ${post.spec.cover}+');'"
+    ></div>
+  </Fragment>
 
-  <th:block th:utext="${post.content.content}"></th:block>
+  <div class="post-card">
+
+    <div class="post-heading">
+      <h1 th:text="${post.spec.title}"></h1>
+      <p class="page-meta">
+        <span th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
+        ></span>
+        <a 
+          th:if="${not #lists.isEmpty(post.categories)}"
+          th:href="@{${post.categories[0].status.permalink}}"
+        >
+          <span 
+            th:text="${post.categories[0].spec.displayName}"></span>
+        </a>
+      </p>
+    </div>
+
+    <div class="post-content">
+      <th:block th:utext="${post.content.content}"></th:block>
+    </div>
+  </div>
 
   <halo:comment
     group="content.halo.run"

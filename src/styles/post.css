@@ -1,0 +1,84 @@
+.site-background{
+    background-position: 50% 20%;
+}
+
+.post-card{
+    display: grid;
+    gap: 1rem;
+}
+
+.post-heading{
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.post-heading a{
+    color: var(--ink-3);
+    text-decoration-line: none;
+}
+
+.post-heading a:hover{
+    color: var(--accent);
+}
+
+.post-content{
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-size: 1.1rem;
+    line-height: 1.85;
+}
+
+.post-content :not(pre) > code {
+  padding: 0.15em 0.4em;
+  color: var(--ink);
+  border-radius: 0.35rem;
+  background: var(--accent-bg);
+  font-family: CascadiaMono, "Cascadia Code", Consolas, monospace;
+  font-size: 0.95rem;
+  border: none;
+  margin-left: 0.08rem;
+  margin-right: 0.08rem;
+}
+
+.post-content blockquote {
+  margin: 1.5rem 0;
+  padding: 0.8rem 1rem;
+  border-left: 0.25rem solid var(--accent);
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: var(--ink-2);
+  background: color-mix(in srgb, var(--accent-bg) 30%, transparent);
+  font-size: 1.05rem;
+}
+
+.post-content blockquote > :first-child {
+  margin-top: 0;
+}
+
+.post-content blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.post-content pre{
+    margin: 1.5rem 0;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    border-radius: 0.9rem;
+    color: var(--ink);
+    background-color: color-mix(in srgb, var(--accent-bg) 70%, transparent)
+}
+
+.post-content pre > code {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font-family: CascadiaMono, "Cascadia Code", Consolas, monospace;
+}
