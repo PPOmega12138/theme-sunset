@@ -68,17 +68,156 @@
 
 .post-content pre{
     margin: 1.5rem 0;
-    padding: 1.1rem 1.25rem;
+    padding: 2.8rem 1.25rem 1.1rem;
     overflow-x: auto;
     border-radius: 0.9rem;
-    color: var(--ink);
-    background-color: color-mix(in srgb, var(--accent-bg) 70%, transparent)
+    border: none;
+    color: #dcdddd;
+    background-color: #211820;
+    position: relative;
 }
 
 .post-content pre > code {
+  display: block;
+  white-space: inherit;
   padding: 0;
   border: 0;
   color: inherit;
   background: transparent;
   font-family: CascadiaMono, "Cascadia Code", Consolas, monospace;
+}
+
+.post-content pre > code[data-language]::before{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  height: 2.2rem;
+  padding: 0 5.5rem 0 1.25rem;
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, #211820 84%, var(--accent));
+  color: var(--ink-3);
+  content: attr(data-language);
+  font-family: CascadiaMono, "Cascadia Code", Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.post-content .code-copy-button {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.65rem;
+  z-index: 1;
+  border: none;
+  border-radius: 0.4rem;
+  color: #dcdddd;
+  background: color-mix(in srgb, #211820 70%, var(--accent));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0;
+  appearance: none;
+}
+
+.post-content .code-copy-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.post-content .code-copy-button:focus-visible {
+  outline: 2px solid #00fcd7;
+  outline-offset: 2px;
+}
+
+.post-content .code-copy-button.is-failed {
+  color: #ff7a8a;
+}
+
+.post-content .code-copy-button:hover {
+  color: #211820;
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+.post-content .code-copy-button.is-copied {
+  color: #211820;
+  background: #00fcd7;
+}
+
+.post-content .hljs-comment,
+.post-content .hljs-quote {
+  color: #8b95a8;
+  font-style: italic;
+}
+
+.post-content .hljs-keyword,
+.post-content .hljs-selector-tag,
+.post-content .hljs-literal,
+.post-content .hljs-meta {
+  color: #ff6db7;
+}
+
+.post-content .hljs-string,
+.post-content .hljs-template-variable,
+.post-content .hljs-regexp {
+  color: #00fcd7;
+}
+
+.post-content .hljs-title,
+.post-content .hljs-title.function_,
+.post-content .hljs-function .hljs-title,
+.post-content .hljs-built_in {
+  color: #59c2ff;
+}
+
+.post-content .hljs-type,
+.post-content .hljs-class .hljs-title {
+  color: #86c8ff;
+}
+
+.post-content .hljs-number,
+.post-content .hljs-attr,
+.post-content .hljs-symbol,
+.post-content .hljs-bullet {
+  color: #ffb660;
+}
+
+.post-content .hljs-variable,
+.post-content .hljs-params,
+.post-content .hljs-property,
+.post-content .hljs-subst {
+  color: #e1e6f3;
+}
+
+.post-content .hljs-ln{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.post-content .hljs-ln-numbers{
+  width: 1%;
+  padding-right: 1rem;
+  color: var(--ink-3);
+  text-align: right;
+  vertical-align: top;
+  user-select: none;
+  border-right: 1px solid var(--rule);
+}
+
+.post-content .hljs-ln-code{
+  padding-left: 1rem;
+  vertical-align: top;
 }

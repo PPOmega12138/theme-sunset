@@ -26,6 +26,9 @@ importers:
       highlight.js:
         specifier: ^11.12.0
         version: 11.12.0
+      highlightjs-line-numbers.js:
+        specifier: ^2.9.1
+        version: 2.9.1
       ky:
         specifier: ^2.0.0
         version: 2.0.0
@@ -1395,6 +1398,9 @@ packages:
   highlight.js@11.12.0:
     resolution: {integrity: sha512-nbfWpyRMcMrPMmDwJB+dhX/eiaPKtc2RB+0QZskqJ3WjRA/FDS0e9hZrx8EC/lbEv8gXy98FcDbNa/dspAaJMg==}
     engines: {node: '>=12.0.0'}
+
+  highlightjs-line-numbers.js@2.9.1:
+    resolution: {integrity: sha512-OVLCl58g9hvY11jDCMDjyIM1HcWtElogmRpBBVb0KxMDXxtket58iHA4ex8HCWmQuR1rorYWkQ+4wn3S2T+xlg==}
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
@@ -3890,6 +3896,8 @@ snapshots:
       space-separated-tokens: 2.0.2
 
   highlight.js@11.12.0: {}
+
+  highlightjs-line-numbers.js@2.9.1: {}
 
   hookable@5.5.3: {}
 
