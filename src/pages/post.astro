@@ -17,34 +17,46 @@ import "../styles/post.css"
     ></div>
   </Fragment>
 
-  <div class="post-card">
 
-    <div class="post-heading">
-      <h1 th:text="${post.spec.title}"></h1>
-      <p class="page-meta">
-        <span th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
-        ></span>
-        <a 
-          th:if="${not #lists.isEmpty(post.categories)}"
-          th:href="@{${post.categories[0].status.permalink}}"
-        >
-          <span 
-            th:text="${post.categories[0].spec.displayName}"></span>
-        </a>
-      </p>
-    </div>
 
-    <div class="post-content">
-      <th:block th:utext="${post.content.content}"></th:block>
-    </div>
+
+  <div class="post-heading">
+    <h1 th:text="${post.spec.title}"></h1>
+    <p class="page-meta">
+      <span th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
+      ></span>
+      <a 
+        th:if="${not #lists.isEmpty(post.categories)}"
+        th:href="@{${post.categories[0].status.permalink}}"
+      >
+        <span 
+          th:text="${post.categories[0].spec.displayName}"></span>
+      </a>
+    </p>
   </div>
 
-  <halo:comment
-    group="content.halo.run"
-    kind="Post"
-    th:attr="name=${post.metadata.name}"
-  >
-  </halo:comment>
+  <div class="post-layout">
+
+    <div class="post-card">
+      <div class="post-content">
+        <th:block th:utext="${post.content.content}"></th:block>
+      </div>
+    </div>
+
+    <aside class="post-toc" aria-labelledby="post-toc-title" hidden>
+      <p id="post-toc-title" class="post-toc__title">文章目录</p>
+      <ol class="post-toc__list"></ol>
+    </aside>
+  </div>
+
+  <div class="post-comment">
+    <halo:comment
+      group="content.halo.run"
+      kind="Post"
+      th:attr="name=${post.metadata.name}"
+    >
+    </halo:comment>
+  </div>
 </Layout>
 
 <script>
@@ -187,6 +199,51 @@ import "../styles/post.css"
     }
   });
 });
+
+
+const tocElement = document.querySelector(".post-toc");
+const tocList = tocElement?.querySelector(".post-toc__list");
+const headings = document.querySelectorAll(".post-content h2, .post-content h3, .post-content h1");
+
+if (tocElement && tocList && headings.length > 0) {
+  headings.forEach((heading, index) => {
+    const title = heading.textContent?.trim();
+
+    if (!title) {
+      return;
+    }
+
+    if (!heading.id) {
+      const baseId =
+        title
+          .toLowerCase()
+          .replace(/[^\w\u4e00-\u9fff]+/g, "-")
+          .replace(/^-+|-+$/g, "") || `section-${index + 1}`;
+
+      let headingId = baseId;
+      let duplicateIndex = 2;
+
+      while (document.getElementById(headingId)) {
+        headingId = `${baseId}-${duplicateIndex}`;
+        duplicateIndex += 1;
+      }
+
+      heading.id = headingId;
+    }
+
+    const item = document.createElement("li");
+    item.className = `post-toc__item post-toc__item--${heading.tagName.toLowerCase()}`;
+
+    const link = document.createElement("a");
+    link.href = `#${heading.id}`;
+    link.textContent = title;
+
+    item.append(link);
+    tocList.append(item);
+  });
+
+  tocElement.hidden = false;
+}
 
 
 </script>
