@@ -1,43 +1,52 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import '../styles/archives.css';
 ---
 
-<Layout pageTitle="归档">
+<Layout pageTitle="归档" pageSubtitle="ARCHIVES">
   <Fragment slot="head">
     <title th:text="|归档 - ${site.title}|"></title>
   </Fragment>
 
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(theme.config.background.archive_bgimg)}"
+      th:style="'background-image: url('+ ${theme.config.background.archive_bgimg}+');'"
+    ></div>
+  </Fragment>
+
   <section class="archive-list" aria-label="Archive list">
     <th:block th:each="archive : ${archives.items}">
-      <th:block th:each="month : ${archive.months}">
-        <div class="archive-group">
-          <h2
-            class="archive-group__year"
-            th:text="|${archive.year} · ${month.month}|"
-          >
-          </h2>
-          <ul class="archive-group__items">
-            <li th:each="post : ${month.posts}" class="archive-entry">
-              <span
-                class="archive-entry__date"
-                th:text="${#dates.format(post.spec.publishTime, 'MM/dd')}"
-              ></span>
-              <div>
-                <h3 class="archive-entry__title">
-                  <a
-                    th:href="@{${post.status.permalink}}"
-                    th:text="${post.spec.title}"></a>
-                </h3>
-                <p
-                  class="archive-entry__summary"
-                  th:text="${post.status.excerpt}"
-                >
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </th:block>
+      <section class="archive-year">
+        <h2 class="archive-year__title" th:text="${archive.year}"></h2>
+
+        <th:block th:each="month : ${archive.months}">
+          <div class="archive-group">
+            <h3
+              class="archive-group__year"
+              th:text="|${archive.year} · ${month.month}|"
+            >
+            </h3>
+            <ul class="archive-group__items">
+              <li th:each="post : ${month.posts}" class="archive-entry">
+                <span
+                  class="archive-entry__date"
+                  th:text="${#dates.format(post.spec.publishTime, 'MM/dd')}"
+                ></span>
+                <div>
+                  <h4 class="archive-entry__title">
+                    <a
+                      th:href="@{${post.status.permalink}}"
+                      th:text="${post.spec.title}"></a>
+                  </h4>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </th:block>
+      </section>
     </th:block>
 
     <div th:if="${archives.total == 0}" class="archive-empty">暂无文章。</div>
@@ -51,7 +60,7 @@ import Layout from "../layouts/Layout.astro";
     <a
       th:if="${archives.hasPrevious()}"
       th:href="@{${archives.prevUrl}}"
-      class="pagination__prev">&larr; 较新</a
+      class="pagination__prev">&larr; 上一页</a
     >
     <span
       class="pagination__info"
@@ -59,7 +68,7 @@ import Layout from "../layouts/Layout.astro";
     <a
       th:if="${archives.hasNext()}"
       th:href="@{${archives.nextUrl}}"
-      class="pagination__next">较旧 &rarr;</a
+      class="pagination__next">下一页 &rarr;</a
     >
   </nav>
 </Layout>

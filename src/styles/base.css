@@ -80,7 +80,7 @@ body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-position: center;
+  background-position: 50% 20%;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -223,16 +223,29 @@ hr {
   border-top: 1px solid var(--rule);
 }
 
-
-
 .page-heading {
-  padding-bottom: 1.75rem;
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  width: fit-content;
+  max-width: 100%;
 }
 
 .page-heading h1 {
-  margin-bottom: 0.25em;
+  margin-bottom: 0;
+}
+
+.page-heading__subtitle{
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ink-3);
+  font-weight: 700;
+  letter-spacing: 0.14rem;
 }
 
 .page-meta {

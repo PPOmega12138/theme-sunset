@@ -57,6 +57,14 @@ spec:
           label: 首页一句话
           value: ""
 
+    - group: background
+      label: "背景图"
+      formSchema:
+        - $formkit: attachment
+          name: archive_bgimg
+          label: "归档页背景图"
+          accepts: 
+            - image/*
 
     - group: footer
       label: "页脚"

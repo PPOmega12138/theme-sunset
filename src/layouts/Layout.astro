@@ -5,10 +5,11 @@ import Header from "../components/Header.astro";
 
 interface Props {
   pageTitle?: string;
+  pageSubtitle?: string;
   contentClass?: string;
 }
 
-const { pageTitle, contentClass } = Astro.props;
+const { pageTitle, pageSubtitle, contentClass } = Astro.props;
 
 const hasHeading = Boolean(pageTitle);
 ---
@@ -42,6 +43,7 @@ const hasHeading = Boolean(pageTitle);
     </script>
     <slot name="head" />
   </head>
+
   <body>
     <slot name="background" />
     <Header />
@@ -49,6 +51,7 @@ const hasHeading = Boolean(pageTitle);
         {
           hasHeading && (
             <header class="page-heading">
+              {pageSubtitle && <p class="page-heading__subtitle">{pageSubtitle}</p>}
               {pageTitle && <h1>{pageTitle}</h1>}
             </header>
           )
