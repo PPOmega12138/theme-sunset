@@ -350,6 +350,14 @@ a.index-card:focus-visible,
     z-index: 1;
 }
 
+.index-recent--overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
 .index-recent--item > a{
     display: block;
 }

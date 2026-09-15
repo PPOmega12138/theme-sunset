@@ -110,36 +110,39 @@ import "../styles/index.css"
           th:each="post,postStat : ${posts.items}"
           th:if="${postStat.index lt 3}"
         >
-          <a th:href="@{${post.status.permalink}}"             th:if="${not #strings.isEmpty(post.spec.cover)}">
+          <a
+            th:href="@{${post.status.permalink}}"
+            class="index-recent--overlay"
+          ></a>
+          <a
+            th:href="@{${post.status.permalink}}"
+            th:if="${not #strings.isEmpty(post.spec.cover)}"
+          >
             <img
-            class="index-recent--image"
-            th:src="${post.spec.cover}"
-            alt=""
-            loading="lazy"
+              class="index-recent--image"
+              th:src="${post.spec.cover}"
+              alt=""
+              loading="lazy"
             />
           </a>
-          <div class="index-recent--info">
-            <a
-              th:if="${not #lists.isEmpty(post.categories)}"
-              th:href="@{${post.categories[0].status.permalink}}"
-            >
-              <p
-                class="index-recent--categories"
-                th:text="${post.categories[0].spec.displayName}"
-                >分类</p>
-            </a>
 
-            <a th:href="@{${post.status.permalink}}">
-              <p
+          <div class="index-recent--info">
+            <p
+              class="index-recent--categories"
+              th:text="${post.categories[0].spec.displayName}"
+              th:if="${not #lists.isEmpty(post.categories)}"
+              >分类</p>
+
+            <p
               class="index-recent--title"
               th:text="${post.spec.title}"
               >文章标题</p>
               <p
-              class="index-recent--excerpt"
-              th:text="${post.status.excerpt}"
+                class="index-recent--excerpt"
+                th:text="${post.status.excerpt}"
               >摘要</p>
-            </a>
           </div>
+
         </div>
 
         <a class="index-card  index-card--archives" th:href="@{${site.routes.archivesUri}}">
