@@ -265,6 +265,23 @@ hr {
   gap: 2rem;
 }
 
+.spoiler{
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+  color: transparent;
+  background: color-mix(in srgb, var(--bg) 78%, var(--accent));
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.25s ease;
+}
+
+.spoiler:hover,
+.spoiler:focus{
+  background:var(--accent-bg);
+  user-select: text;
+  color: inherit;
+}
+
 @media (max-width: 680px) {
   main {
     max-width: calc(100% - 2rem);
