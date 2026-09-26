@@ -33,7 +33,7 @@ import '../styles/archives.css';
               <li th:each="post : ${month.posts}" class="archive-entry">
                 <span
                   class="archive-entry__date"
-                  th:text="${#dates.format(post.spec.publishTime, 'MM/dd')}"
+                  th:text="${#dates.format(post.spec.publishTime, 'MM-dd')}"
                 ></span>
                 <div>
                   <h4 class="archive-entry__title">
@@ -64,7 +64,7 @@ import '../styles/archives.css';
     >
     <span
       class="pagination__info"
-      th:text="|${archives.page} / ${archives.totalPages}|"></span>
+      th:text="|第 ${archives.page} 页  共 ${archives.totalPages} 页|"></span>
     <a
       th:if="${archives.hasNext()}"
       th:href="@{${archives.nextUrl}}"

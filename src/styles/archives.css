@@ -30,3 +30,16 @@
 .archive-group__items{
     border-bottom: 1px solid var(--rule);
 }
+
+.archive-entry__title{
+    font-size: 1.5rem;
+}
+.archive-entry__title a{
+    text-decoration: none;
+    color: var(--ink-3);
+    transition: color 180ms ease;
+}
+
+.archive-entry__title a:hover{
+    color: var(--accent);
+}
