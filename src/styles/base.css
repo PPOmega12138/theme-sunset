@@ -101,6 +101,18 @@ body {
   background-size: var(--background-pattern-size);
 }
 
+
+.comment{
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-size: 1.1rem;
+    line-height: 1.85;
+}
+
 body > header,
 body > main,
 body > footer{
@@ -224,7 +236,7 @@ hr {
 }
 
 .page-heading {
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   overflow: hidden;
   padding: 1rem;
   border-radius: 1.25rem;
@@ -237,6 +249,10 @@ hr {
 }
 
 .page-heading h1 {
+  margin-bottom: 0;
+}
+
+.page-heading p{
   margin-bottom: 0;
 }
 
@@ -262,7 +278,18 @@ hr {
 
 .page-content {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
+}
+
+.content{
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 1.1rem;
+  line-height: 1.85;
 }
 
 .spoiler{
