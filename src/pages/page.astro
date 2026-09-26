@@ -9,12 +9,16 @@ import Layout from "../layouts/Layout.astro";
 
   <div class="page-heading">
     <h1 th:text="${singlePage.spec.title}"></h1>
-    <p class="page-meta">
-      <span
-        th:text="${#dates.format(singlePage.spec.publishTime, 'yyyy-MM-dd')}"
-      ></span>
-    </p>
   </div>
+
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(singlePage.spec.cover)}"
+      th:style="'background-image: url('+ ${singlePage.spec.cover}+');'"
+    ></div>
+  </Fragment>
 
   <div 
     th:utext="${singlePage.content.content}"
