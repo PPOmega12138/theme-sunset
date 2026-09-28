@@ -1,22 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import '../styles/categories.css'
 ---
 
-<Layout pageTitle="分类">
+<Layout pageTitle="分类" pageSubtitle="CATEGORIES">
   <Fragment slot="head">
     <title th:text="|分类 - ${site.title}|"></title>
   </Fragment>
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(theme.config.background.categories_bgimg)}"
+      th:style="'background-image: url('+ ${theme.config.background.categories_bgimg}+');'"
+    ></div>
+  </Fragment>
 
-  <nav class="taxonomy-list" aria-label="Category list">
-    <div th:each="category : ${categories}" class="taxonomy-list__item">
-      <a
-        class="taxonomy-list__link"
-        th:href="@{${category.status.permalink}}"
-        th:text="${category.spec.displayName}"
+  <nav class="categories-list" aria-label="Category list">
+    <a
+      th:each="category:${categories}"
+      class="categories-card"
+      th:href="@{${category.status.permalink}}"
       >
-      </a>
-      <span class="taxonomy-list__count" th:text="|${category.postCount} 篇|">
-      </span>
-    </div>
+      <span
+        class="categories-card__name"
+        th:text="${category.spec.displayName}"
+      >分类名称</span>
+    
+      <span class="categories-card__count" th:text="|${category.postCount} 篇|">0篇文章</span>
+    </a>
   </nav>
 </Layout>
