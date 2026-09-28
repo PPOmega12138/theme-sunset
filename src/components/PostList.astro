@@ -1,27 +1,134 @@
-<ul class="post-feed__list" role="list">
-  <li th:each="post : ${posts.items}" class="post-feed__item">
-    <a class="post-feed__link" th:href="@{${post.status.permalink}}">
-      <div class="post-feed__body">
-        <p
-          class="post-feed__date"
-          th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
-        >
-        </p>
-        <h2 class="post-feed__title" th:text="${post.spec.title}"></h2>
-        <p class="post-feed__excerpt" th:text="${post.status.excerpt}"></p>
-      </div>
-      <img
-        th:unless="${#strings.isEmpty(post.spec.cover)}"
-        class="post-feed__image"
-        th:src="${post.spec.cover}"
-      />
-    </a>
+<ul class="post-list" role="list">
+  <li
+    th:each="post : ${posts.items}"
+    class="post-item"
+    th:classappend="${#strings.isEmpty(post.spec.cover)}
+    ? ' post-item--plain'
+    : ' post-item--cover'"
+  >
+    <a class="post-link__overlay" th:href="@{${post.status.permalink}}"></a>
+    <div class="post-card">
+      <h2 class="post-card__title" th:text="${post.spec.title}"></h2>
+      <p
+        class="post-card__date"
+        th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
+      >
+      </p>
+      <p class="post-card__excerpt" th:text="${post.status.excerpt}"></p>
+    </div>
+    <img
+      th:unless="${#strings.isEmpty(post.spec.cover)}"
+      class="post-card__image"
+      th:src="${post.spec.cover}"
+      loading="lazy"
+    />
   </li>
 </ul>
 
 <div th:if="${posts.total == 0}" class="feed-empty">暂无文章。</div>
 
 <style>
+  .post-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
 
+  .post-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 240px;
+    max-height: 320px;
 
+    padding: 1.5rem;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+    box-shadow: var(--shadow);
+
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .post-card__image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    object-fit: cover;
+    object-position: 50% 20%;
+  }
+
+  .post-item--cover::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    content: "";
+    pointer-events: none;
+
+    background: linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--bg-raised) 96%, transparent) 0%,
+      color-mix(in srgb, var(--bg-raised) 72%, transparent) 45%,
+      transparent 100%
+    );
+  }
+
+  .post-card {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    padding: 0.75rem;
+    width: 100%;
+  }
+
+  .post-link__overlay {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+
+    border-radius: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .post-card__title {
+    font-size: 2rem;
+    color: var(--ink);
+    margin: 0;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  .post-card__date {
+    font-size: 0.75rem;
+    color: var(--ink-3);
+  }
+  .post-card__excerpt {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .post-item:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: var(--shadow-float);
+  }
+  .post-item:hover .post-card__title {
+    color: var(--accent);
+  }
 </style>
