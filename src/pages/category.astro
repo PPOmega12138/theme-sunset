@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PostList from "../components/PostList.astro";
 ---
 
 <Layout>
@@ -14,9 +15,7 @@ import Layout from "../layouts/Layout.astro";
     </p>
   </div>
 
-  <th:block th:replace="~{fragments/post-list}"></th:block>
-
-  <div th:if="${posts.total == 0}" class="feed-empty">暂无文章。</div>
+  <PostList />
 
   <nav
     th:if="${posts.totalPages gt 1}"
