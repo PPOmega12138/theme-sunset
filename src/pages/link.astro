@@ -1,0 +1,55 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/link.css";
+---
+
+<Layout contentClass="prose" pageTitle="友链" pageSubtitle="LINKS">
+  <Fragment slot="head">
+    <title th:text="|${singlePage.spec.title} - ${site.title}|"></title>
+  </Fragment>
+
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(singlePage.spec.cover)}"
+      th:style="'background-image: url('+ ${singlePage.spec.cover}+');'"
+    >
+    </div>
+  </Fragment>
+
+  <div class="link-list">
+    <div class="link-group" th:each="group: ${linkFinder.groupBy()}">
+      <h2 class="link-group__name" th:text="${group.spec.displayName}">
+        未分组
+      </h2>
+
+      <div class="link-card" th:each="link : ${group.links}">
+        <a
+          th:href="${link.spec.url}"
+          target="_blank"
+          class="link-card__overlay"></a>
+
+        <img
+          th:if="${link.spec.logo}"
+          th:src="${link.spec.logo}"
+          class="link-card__image"
+        />
+        <span th:text="${link.spec.displayName}" class="link-card__name"></span>
+        <span th:text="${link.spec.description}" class="link-card__description"
+        ></span>
+      </div>
+    </div>
+  </div>
+
+
+<div th:utext="${singlePage.content.content}" class="content"></div>
+
+<div class="comment">
+  <halo:comment
+    group="content.halo.run"
+    kind="SinglePage"
+    th:attr="name=${singlePage.metadata.name}"></halo:comment>
+</div>
+
+</Layout>
