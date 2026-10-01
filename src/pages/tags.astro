@@ -1,21 +1,34 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/tags.css"
 ---
 
-<Layout pageTitle="标签">
+<Layout pageTitle="标签" pageSubtitle="TAGS">
   <Fragment slot="head">
     <title th:text="|标签 - ${site.title}|"></title>
   </Fragment>
 
-  <div class="tag-cloud" role="list" aria-label="Tag list">
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(theme.config.background.tags_bgimg)}"
+      th:style="'background-image: url('+ ${theme.config.background.tags_bgimg}+');'"
+    ></div>
+  </Fragment>
+
+  <div class="tags-list" role="list" aria-label="Tag list">
     <a
       th:each="tag : ${tags}"
-      class="tag-pill"
+      class="tags-card"
       role="listitem"
       th:href="@{${tag.status.permalink}}"
     >
-      <span th:text="${tag.spec.displayName}"></span>
-      <span class="tag-pill__count" th:text="${tag.postCount}"></span>
+      <span 
+        th:text="${tag.spec.displayName}"
+        class="tags-card__name"  
+      ></span>
+      <span class="tags-card__count" th:text="${tag.postCount}"></span>
     </a>
   </div>
 </Layout>

@@ -1,0 +1,53 @@
+.tags-list{
+    
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.tags-card{
+    display: inline-flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.75rem;
+    text-decoration: none;
+    transition: all 180ms ease;
+
+    width: fit-content;
+
+    margin-top: 1rem;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.tags-card__name{
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink-2);
+    transition: color 180ms ease;
+}
+
+
+.tags-card__count{
+    color: var(--ink-3);
+    font-size: 0.75rem;
+    transition: color 180ms ease;
+}
+
+.tags-card:hover .tags-card__name,
+.tags-card:hover .tags-card__count{
+    color: var(--accent);
+}
+
+.tags-card:hover{
+    transform: translateY(-0.25rem);
+    box-shadow: var(--shadow-float);
+    background: color-mix(in srgb, var(--accent-bg) 72%, transparent);
+}
