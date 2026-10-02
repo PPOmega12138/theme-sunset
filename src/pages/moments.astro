@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout pageTitle="动态" pageSubtitle="moments">
+  <Fragment slot="head">
+    <title th:text="|动态 - ${site.title}|"></title>
+  </Fragment>
+
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(theme.config.background.moments_bgimg)}"
+      th:style="'background-image: url('+ ${theme.config.background.moments_bgimg}+');'"
+    >
+    </div>
+  </Fragment>
+
+  <div>
+    <ul>
+      <li
+        th:each="moment : ${moments.items}"
+        th:with="content=${moment.spec.content}"
+      >
+        <div
+          th:if="${not #strings.isEmpty(content.html)}"
+          th:utext="${content.html}"
+        >
+        </div>
+        <th:block
+          th:if="${not #lists.isEmpty(content.medium)}"
+          th:each="momentItem : ${content.medium}"
+        >
+          <img
+            th:if="${momentItem.type.name == 'PHOTO'}"
+            th:src="${momentItem.url}"
+          />
+          <video
+            th:if="${momentItem.type.name == 'VIDEO'}"
+            th:src="${momentItem.url}"></video>
+          <audio
+            th:if="${momentItem.type.name == 'AUDIO'}"
+            th:src="${momentItem.url}"
+            controls="true"></audio>
+        </th:block>
+      </li>
+    </ul>
+
+
+    <div th:if="${moments.hasPrevious() || moments.hasNext()}" class="pagination">
+      <a 
+        th:href="@{${moments.prevUrl}}" 
+        class="pagination__prev"
+        th:if="${moments.hasPrevious()}"
+      >
+        <span>&larr; 上一页</span>
+      </a>
+      <span
+        class="pagination__info"
+        th:text="|第 ${moments.page} 页  共 ${moments.totalPages} 页|"
+      ></span>
+      <a 
+        th:href="@{${moments.nextUrl}}" 
+        class="pagination__next"
+        th:if="${moments.hasNext()}"
+      >
+        <span>下一页 &rarr;</span>
+      </a>
+    </div>
+
+  </div>
+</Layout>
