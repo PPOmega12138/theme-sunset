@@ -53,7 +53,7 @@ import '../styles/archives.css';
   </section>
 
   <nav
-    th:if="${archives.totalPages gt 1}"
+    th:if="${archives.hasPrevious() || archives.hasNext()}"
     class="pagination"
     aria-label="Pagination"
   >
