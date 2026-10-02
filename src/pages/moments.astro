@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/moments.css"
 ---
 
 <Layout pageTitle="动态" pageSubtitle="moments">
@@ -18,32 +19,53 @@ import Layout from "../layouts/Layout.astro";
   </Fragment>
 
   <div>
-    <ul>
+    <ul class="moments-list">
       <li
         th:each="moment : ${moments.items}"
         th:with="content=${moment.spec.content}"
+        class="moments-card"
       >
+        <div
+          th:text="${#temporals.format(moment.spec.releaseTime, 'yyyy-MM-dd')}"
+          class="moments-card__time"
+        >
+        </div>
+
         <div
           th:if="${not #strings.isEmpty(content.html)}"
           th:utext="${content.html}"
+          class="moments-card__content"
         >
         </div>
-        <th:block
+
+        <div
           th:if="${not #lists.isEmpty(content.medium)}"
-          th:each="momentItem : ${content.medium}"
+          class="moments-card__media"
         >
-          <img
+          <th:block th:each="momentItem : ${content.medium}">
+          <button
+            type="button"
             th:if="${momentItem.type.name == 'PHOTO'}"
-            th:src="${momentItem.url}"
-          />
+            class="moments-card__img"
+          >
+            <img
+              th:src="${momentItem.url}"
+            />
+          </button>
           <video
             th:if="${momentItem.type.name == 'VIDEO'}"
-            th:src="${momentItem.url}"></video>
+            th:src="${momentItem.url}"
+            controls="true"
+            class="moments-card__video"
+          ></video>
           <audio
             th:if="${momentItem.type.name == 'AUDIO'}"
             th:src="${momentItem.url}"
-            controls="true"></audio>
-        </th:block>
+            controls="true"
+            class="moments-card__audio"  
+          ></audio>
+            </th:block>
+        </div>
       </li>
     </ul>
 
