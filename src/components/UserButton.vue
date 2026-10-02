@@ -126,8 +126,8 @@ onUnmounted(()=>{
         role="menu">
         <p class="user-menu--name">{{ displayName }}</p>
 
-        <a href="/console" role="menuitem">控制台</a>
-        <a href="/uc" role="menuitem">用户信息</a>
+        <a href="/console" role="menuitem" target="_blank">控制台</a>
+        <a href="/uc" role="menuitem" target="_blank">用户信息</a>
         <a class="user-menu--logout" href="/logout" role="menuitem">登出</a>
       </div>
     </div>
