@@ -290,6 +290,7 @@ hr {
 
 .page-heading h1 {
   margin-bottom: 0;
+  text-transform: uppercase;
 }
 
 .page-heading p{
@@ -302,6 +303,7 @@ hr {
   color: var(--ink-3);
   font-weight: 700;
   letter-spacing: 0.14rem;
+  text-transform: uppercase;
 }
 
 .page-meta {
@@ -330,6 +332,7 @@ hr {
   -webkit-backdrop-filter: blur(14px);
   font-size: 1.1rem;
   line-height: 1.85;
+  margin-top: 1rem;
 }
 
 .spoiler{

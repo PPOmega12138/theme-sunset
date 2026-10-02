@@ -7,11 +7,13 @@ interface Props {
   pageTitle?: string;
   pageSubtitle?: string;
   contentClass?: string;
+  pageTitleExpression?: string;
+  pageSubtitleExpression?: string;
 }
 
-const { pageTitle, pageSubtitle, contentClass } = Astro.props;
+const { pageTitle, pageSubtitle, contentClass, pageTitleExpression, pageSubtitleExpression } = Astro.props;
 
-const hasHeading = Boolean(pageTitle);
+const hasHeading = Boolean(pageTitle || pageTitleExpression);
 ---
 
 <!doctype html>
@@ -51,8 +53,8 @@ const hasHeading = Boolean(pageTitle);
         {
           hasHeading && (
             <header class="page-heading">
-              {pageSubtitle && <p class="page-heading__subtitle">{pageSubtitle}</p>}
-              {pageTitle && <h1>{pageTitle}</h1>}
+              {(pageSubtitle || pageSubtitleExpression) && <p class="page-heading__subtitle" th:text={pageSubtitleExpression}>{pageSubtitle}</p>}
+              {(pageTitle || pageTitleExpression) && <h1 th:text={pageTitleExpression}>{pageTitle}</h1>}
             </header>
           )
         }

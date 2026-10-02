@@ -2,14 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout contentClass="prose">
+<Layout contentClass="prose" pageTitleExpression="${singlePage.spec.title}" pageSubtitleExpression="${singlePage.spec.slug}">
   <Fragment slot="head">
     <title th:text="|${singlePage.spec.title} - ${site.title}|"></title>
   </Fragment>
-
-  <div class="page-heading">
-    <h1 th:text="${singlePage.spec.title}"></h1>
-  </div>
 
   <Fragment slot="background">
     <div
