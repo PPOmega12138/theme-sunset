@@ -73,6 +73,8 @@ spec:
         - $formkit: attachment
           name: tags_bgimg
           label: "标签页背景图"
+          accepts:
+            - image/*
         - $formkit: attachment
           name: moments_bgimg
           label: "动态（瞬间）页背景图"
