@@ -8,6 +8,7 @@ import typescript from "highlight.js/lib/languages/typescript";
 import xml from "highlight.js/lib/languages/xml";
 import yaml from "highlight.js/lib/languages/yaml";
 import python from "highlight.js/lib/languages/python";
+import ini from "highlight.js/lib/languages/ini"
 
 export async function initHighlight(selector = ".post-content pre > code") {
 
@@ -19,6 +20,7 @@ export async function initHighlight(selector = ".post-content pre > code") {
   hljs.registerLanguage("typescript", typescript);
   hljs.registerLanguage("xml", xml);
   hljs.registerLanguage("yaml", yaml);
+  hljs.registerLanguage("ini",ini);
 
   hljs.registerAliases(["sh", "shell", "zsh"], { languageName: "bash" });
   hljs.registerAliases(["js", "jsx"], { languageName: "javascript" });
@@ -53,7 +55,9 @@ export async function initHighlight(selector = ".post-content pre > code") {
     yaml: "YAML",
     yml: "YAML",
     python: "Python",
-    py: "Python"
+    py: "Python",
+    ini: "INI",
+    toml: "TOML"
   };
 
 
