@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import "../styles/post.css"
+import "../styles/highlightjs.css"
 ---
 
 <Layout contentClass="prose">
@@ -38,7 +39,7 @@ import "../styles/post.css"
   <div class="post-layout">
 
     <div class="post-card">
-      <div class="post-content">
+      <div class="post-content js-content">
         <th:block th:utext="${post.content.content}"></th:block>
       </div>
     </div>
@@ -62,7 +63,7 @@ import "../styles/post.css"
 <script>
 import { initHighlight } from "../features/highlightjs";
 
-initHighlight();
+initHighlight(".js-content pre > code");
 
 const tocElement = document.querySelector(".post-toc");
 const tocList = tocElement?.querySelector(".post-toc__list");
