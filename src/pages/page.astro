@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/highlightjs.css"
 ---
 
 <Layout contentClass="prose" pageTitleExpression="${singlePage.spec.title}" pageSubtitleExpression="${singlePage.spec.slug}">
@@ -18,7 +19,7 @@ import Layout from "../layouts/Layout.astro";
 
   <div 
     th:utext="${singlePage.content.content}"
-    class="content"></div>
+    class="content js-content"></div>
 
   <div class="comment">
     <halo:comment
@@ -27,3 +28,9 @@ import Layout from "../layouts/Layout.astro";
       th:attr="name=${singlePage.metadata.name}"></halo:comment>
   </div>
 </Layout>
+
+
+<script>
+  import { initHighlight } from "../features/highlightjs";
+  initHighlight(".js-content pre > code");
+</script>
