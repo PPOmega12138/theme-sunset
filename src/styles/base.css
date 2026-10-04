@@ -144,6 +144,7 @@ body {
 }
 
 .card{
+  padding: 1.5rem;
   border-radius: 1.25rem;
   background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
   box-shadow: var(--shadow);

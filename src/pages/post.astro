@@ -21,7 +21,7 @@ import "../styles/highlightjs.css"
 
 
 
-  <div class="post-heading">
+  <div class="card post-heading">
     <h1 th:text="${post.spec.title}"></h1>
     <p class="page-meta">
       <span th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
@@ -39,7 +39,7 @@ import "../styles/highlightjs.css"
   <div class="post-layout">
 
     <div class="post-card">
-      <div class="post-content js-content">
+      <div class="card post-content js-content">
         <th:block th:utext="${post.content.content}"></th:block>
       </div>
     </div>
