@@ -26,7 +26,7 @@
 .tags-card__name{
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--ink-2);
+    color: var(--tag-color,var(--ink-2));
     transition: color 180ms ease;
 }
 
