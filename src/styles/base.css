@@ -14,7 +14,7 @@
 :root {
   --bg: #f7eaf1;
   --bg-raised: #fff1f8;
-  --surface: rgb(255 245 251 / 80%);
+  --surface: rgb(255 245 251 / 94%);
   --ink: #3d2636;
   --ink-2: #735365;
   --ink-3: #a17b91;
@@ -38,7 +38,7 @@
 html.dark {
   --bg: #211820;
   --bg-raised: #30212e;
-  --surface: rgb(48 32 45 / 82%);
+  --surface: rgb(48 32 45 / 94%);
   --ink: #fff0fa;
   --ink-2: #e1bfd2;
   --ink-3: #b88fa8;
