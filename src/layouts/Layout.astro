@@ -52,7 +52,7 @@ const hasHeading = Boolean(pageTitle || pageTitleExpression);
     <main class="layout-main">
         {
           hasHeading && (
-            <header class="page-heading">
+            <header class="card page-heading">
               {(pageSubtitle || pageSubtitleExpression) && <p class="page-heading__subtitle" th:text={pageSubtitleExpression}>{pageSubtitle}</p>}
               {(pageTitle || pageTitleExpression) && <h1 th:text={pageTitleExpression}>{pageTitle}</h1>}
             </header>
