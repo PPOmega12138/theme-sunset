@@ -18,7 +18,7 @@ import "../styles/index.css"
 
 
   <section class="index-board" aria-label="homepage">
-    <section class="index-card index-card--welcome">
+    <section class="card index-card index-card--welcome">
 
       <div class="index-welcome--content">
         <p
@@ -55,7 +55,7 @@ import "../styles/index.css"
     </section> 
     
     <section 
-      class="index-card index-card--motto"
+      class="card index-card index-card--motto"
       
     >
       <div class="index-motto--dates">
@@ -96,7 +96,7 @@ import "../styles/index.css"
     </section>
 
     <section class="index-card index-card--recent" aria-labelledby="recent-notes-title">
-      <div class="index-card--heading">
+      <div class="card index-card--heading">
         <p class="index-card--eyebrow">RECENT NOTES</p>
         <h2 id="recent-notes-title">最近文章</h2>
       </div>
@@ -106,7 +106,7 @@ import "../styles/index.css"
         th:if="${not #lists.isEmpty(posts.items)}"
       >
         <div
-          class="index-recent--item"
+          class="card index-recent--item"
           th:each="post,postStat : ${posts.items}"
           th:if="${postStat.index lt 3}"
         >
@@ -145,7 +145,7 @@ import "../styles/index.css"
 
         </div>
 
-        <a class="index-card  index-card--archives" th:href="@{${site.routes.archivesUri}}">
+        <a class="card index-card  index-card--archives" th:href="@{${site.routes.archivesUri}}">
           <p class="index-card--eyebrow">ALL NOTES</p>
           <h2>全部文章</h2>
           <span>看看所有的文章&nbsp;→</span>
@@ -162,13 +162,13 @@ import "../styles/index.css"
     </section>
 
     <section class="index-card index-card--life">
-      <div class="index-card--heading">
+      <div class="card index-card--heading">
         <p class="index-card--eyebrow">RECENT LIFE</p>
         <h2 id="recent-notes-title">生活小记</h2>
       </div>
 
       <a
-      class="index-card index-card--photos"
+      class="card index-card index-card--photos"
       th:href="@{/photos}"
       >
       <p
@@ -179,7 +179,7 @@ import "../styles/index.css"
       <h2>相册</h2>
       </a>
 
-      <a class="index-card index-card--moments" th:href="@{/moments}">
+      <a class="card index-card index-card--moments" th:href="@{/moments}">
       <p class="index-card--eyebrow">MOMENTS</p>
       <h2>动态</h2>
       <span>最近发生了什么&nbsp; →</span>
