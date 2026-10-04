@@ -45,5 +45,5 @@
 .tags-card:hover{
     transform: translateY(-0.25rem);
     box-shadow: var(--shadow-float);
-    background: color-mix(in srgb, var(--accent-bg) 72%, transparent);
+    background: color-mix(in srgb, var(--accent-bg) 94%, transparent);
 }

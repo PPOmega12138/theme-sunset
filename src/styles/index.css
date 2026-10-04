@@ -36,7 +36,7 @@ a.index-card{
 
 a.index-card:hover{
     color:var(--ink);
-    background: color-mix(in srgb, var(--accent-bg) 72%, transparent);
+    background: color-mix(in srgb, var(--accent-bg) 94%, transparent);
     box-shadow: var(--shadow-float);
     transform: translateY(-0.25rem);
 }
@@ -244,7 +244,7 @@ a.index-card:focus-visible,
 }
 
 .index-recent--item:hover{
-    background: color-mix(in srgb, var(--bg-raised) 72%, transparent);
+    background: color-mix(in srgb, var(--bg-raised) 94%, transparent);
     box-shadow: var(--shadow-float);
     transform: translateY(-0.25rem);
 }
