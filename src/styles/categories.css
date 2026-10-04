@@ -17,12 +17,6 @@
     transition: all 180ms ease;
 
     margin-top: 1rem;
-    padding: 1.5rem;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 }
 
 .categories-card__name{

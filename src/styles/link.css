@@ -23,12 +23,6 @@
     padding-left: 1.25rem;
     border-radius: 1.25rem;
 
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -43,11 +37,6 @@
 }
 
 .link-card{
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 
     flex-basis: calc((100% - 2rem)/3);
     width: calc((100% - 2rem)/3);

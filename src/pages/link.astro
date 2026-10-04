@@ -20,11 +20,11 @@ import "../styles/link.css";
 
   <div class="link-list">
     <div class="link-group" th:each="group: ${linkFinder.groupBy()}">
-      <h2 class="link-group__name" th:text="${group.spec.displayName}">
+      <h2 class="card link-group__name" th:text="${group.spec.displayName}">
         未分组
       </h2>
 
-      <div class="link-card" th:each="link : ${group.links}">
+      <div class="card link-card" th:each="link : ${group.links}">
         <a
           th:href="${link.spec.url}"
           target="_blank"
