@@ -9,11 +9,6 @@
     margin-bottom: 1rem;
     overflow: hidden;
     padding: 1rem;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     max-width: 100%;
 }
 
