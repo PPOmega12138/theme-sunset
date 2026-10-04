@@ -63,7 +63,7 @@ import '../styles/archives.css';
       class="pagination__prev">&larr; 上一页</a
     >
     <span
-      class="pagination__info"
+      class="card pagination__info"
       th:text="|第 ${archives.page} 页  共 ${archives.totalPages} 页|"></span>
     <a
       th:if="${archives.hasNext()}"

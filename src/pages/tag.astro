@@ -29,7 +29,7 @@ import PostList from "../components/PostList.astro";
       class="pagination__prev">&larr; 较新</a
     >
     <span
-      class="pagination__info"
+      class="card pagination__info"
       th:text="|${posts.page} / ${posts.totalPages}|"></span>
     <a
       th:if="${posts.hasNext()}"

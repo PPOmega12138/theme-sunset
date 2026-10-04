@@ -141,11 +141,6 @@ body {
   color: var(--ink-2);
   padding: 1rem;
   font-size:1.25rem;
-  border-radius: 1.25rem;
-  background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 .card{
