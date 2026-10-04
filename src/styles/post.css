@@ -77,10 +77,6 @@
   overflow-y: auto;
   border-radius: 1rem;
   color: var(--ink2);
-  background-color: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 .post-toc__title {

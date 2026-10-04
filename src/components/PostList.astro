@@ -1,7 +1,7 @@
 <ul class="post-list" role="list">
   <li
     th:each="post : ${posts.items}"
-    class="post-item"
+    class="card post-item"
     th:classappend="${#strings.isEmpty(post.spec.cover)}
     ? ' post-item--plain'
     : ' post-item--cover'"
@@ -45,11 +45,7 @@
     min-height: 240px;
     max-height: 320px;
 
-    padding: 1.5rem;
     overflow: hidden;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
 
     transition:
       transform 180ms ease,
