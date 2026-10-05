@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import "../styles/moments.css"
+import "../styles/moments.css";
 ---
 
 <Layout pageTitle="动态" pageSubtitle="moments">
@@ -43,36 +43,33 @@ import "../styles/moments.css"
           class="moments-card__media"
         >
           <th:block th:each="momentItem : ${content.medium}">
-          <button
-            type="button"
-            th:if="${momentItem.type.name == 'PHOTO'}"
-            class="moments-card__img"
-          >
             <img
               th:src="${momentItem.url}"
+              th:if="${momentItem.type.name == 'PHOTO'}"
+              class="moments-card__img"
+              alt=""
             />
-          </button>
-          <video
-            th:if="${momentItem.type.name == 'VIDEO'}"
-            th:src="${momentItem.url}"
-            controls="true"
-            class="moments-card__video"
-          ></video>
-          <audio
-            th:if="${momentItem.type.name == 'AUDIO'}"
-            th:src="${momentItem.url}"
-            controls="true"
-            class="moments-card__audio"  
-          ></audio>
-            </th:block>
+            <video
+              th:if="${momentItem.type.name == 'VIDEO'}"
+              th:src="${momentItem.url}"
+              controls="true"
+              class="moments-card__video"></video>
+            <audio
+              th:if="${momentItem.type.name == 'AUDIO'}"
+              th:src="${momentItem.url}"
+              controls="true"
+              class="moments-card__audio"></audio>
+          </th:block>
         </div>
       </li>
     </ul>
 
-
-    <div th:if="${moments.hasPrevious() || moments.hasNext()}" class="pagination">
-      <a 
-        th:href="@{${moments.prevUrl}}" 
+    <div
+      th:if="${moments.hasPrevious() || moments.hasNext()}"
+      class="pagination"
+    >
+      <a
+        th:href="@{${moments.prevUrl}}"
         class="pagination__prev"
         th:if="${moments.hasPrevious()}"
       >
@@ -80,16 +77,19 @@ import "../styles/moments.css"
       </a>
       <span
         class="pagination__info"
-        th:text="|第 ${moments.page} 页  共 ${moments.totalPages} 页|"
-      ></span>
-      <a 
-        th:href="@{${moments.nextUrl}}" 
+        th:text="|第 ${moments.page} 页  共 ${moments.totalPages} 页|"></span>
+      <a
+        th:href="@{${moments.nextUrl}}"
         class="pagination__next"
         th:if="${moments.hasNext()}"
       >
         <span>下一页 &rarr;</span>
       </a>
     </div>
-
   </div>
 </Layout>
+
+<script>
+  import { initMomentMediaPreview } from "../features/mediaPreview";
+  initMomentMediaPreview();
+</script>
