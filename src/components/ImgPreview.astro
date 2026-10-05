@@ -1,0 +1,21 @@
+---
+interface Props{
+  target?: string;
+}
+
+const {target = ".js-content"} = Astro.props
+---
+
+<dialog
+  class="img-preview"
+  data-image-preview
+  data-target={target}
+>
+  <button
+    class="img-preview__close"
+    type="button"
+  >x</button>
+
+  <img class="img-preview__img" />
+  
+</dialog>
