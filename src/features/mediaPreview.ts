@@ -1,21 +1,34 @@
 import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.css";
 
-import Plyr from "plyr";
-import "plyr/dist/plyr.css";
-
 import "../styles/media-preview.css"
 
 declare global {
   interface Window {
-    Plyr: typeof Plyr;
+    Plyr?: typeof import("plyr").default;
   }
 }
 
-window.Plyr = Plyr;
-
 const initedContainers = new WeakSet<HTMLElement>();
 const initedMomentMediaContainers = new WeakSet<HTMLElement>();
+
+let plyrLoading: Promise<void> | undefined;
+
+function loadPlyr():Promise<void>{
+  if (window.Plyr){
+    return Promise.resolve();
+  }
+
+  if(!plyrLoading){
+    plyrLoading = Promise.all([
+      import("plyr"),
+      import("plyr/dist/plyr.css"),
+    ]).then(([plyrModule]) =>{
+      window.Plyr = plyrModule.default;
+    });
+  }
+  return plyrLoading;
+}
 
 export function initImagePreview(selector = ".js-content"){
   const container = document.querySelector<HTMLElement>(selector);
@@ -62,10 +75,13 @@ export function initImagePreview(selector = ".js-content"){
   initedContainers.add(container);
 }
 
-export function initMomentMediaPreview(selector = ".moments-list"){
+export async function initMomentMediaPreview(selector = ".moments-list"){
   const container = document.querySelector<HTMLElement>(selector);
 
   if (!container || initedMomentMediaContainers.has(container)){return;}
+
+  const hasVideos = container.querySelector(".moments-card__video",);
+  if (hasVideos) {await loadPlyr();}
 
   const mediaGroups = container.querySelectorAll<HTMLElement>(".moments-card__media")
 
@@ -158,7 +174,7 @@ export function initMomentMediaPreview(selector = ".moments-list"){
   GLightbox({
     selector: `${selector} .glightbox`,
     touchNavigation: true,
-    loop: false,
+    loop: true,
     zoomable: true,
     draggable: true,
     autoplayVideos: false,
