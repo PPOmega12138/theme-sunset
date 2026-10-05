@@ -8,3 +8,7 @@
   color: var(--ink-3);
   text-align: center;
 }
+
+.glightbox-container .plyr {
+  --plyr-color-main: var(--accent);
+}
