@@ -1,5 +1,6 @@
 import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.css";
+import "../styles/image-preview.css"
 
 const initedContainers = new WeakSet<HTMLElement>();
 
