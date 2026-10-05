@@ -235,9 +235,6 @@ object {
   height: auto;
 }
 
-img {
-  border-radius: 10px;
-}
 
 code {
   font-size: 0.88em;
