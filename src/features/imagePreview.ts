@@ -10,7 +10,7 @@ export function initImagePreview(selector = ".js-content"){
     return;
   }
 
-  const images = container.querySelectorAll<HTMLImageElement>("img:not[data-no-preview]",);
+  const images = container.querySelectorAll<HTMLImageElement>("img:not([data-no-preview])",);
 
   images.forEach((image)=> {
     if (image.closest("a")){return;}
