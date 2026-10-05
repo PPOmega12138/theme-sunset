@@ -23,8 +23,12 @@ import "../styles/moments.css";
       <li
         th:each="moment : ${moments.items}"
         th:with="content=${moment.spec.content}"
-        class="moments-card"
+        class="card moments-card"
       >
+        <img 
+          th:src = "${moment.owner.avatar}"
+          class="moments-card__avatar"
+        />
         <div
           th:text="${#temporals.format(moment.spec.releaseTime, 'yyyy-MM-dd')}"
           class="moments-card__time"
