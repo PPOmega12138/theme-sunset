@@ -23,11 +23,6 @@
     min-height: 0;
     overflow: hidden;
     padding: 1.5rem;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 }
 
 a.index-card{
@@ -41,7 +36,7 @@ a.index-card{
 
 a.index-card:hover{
     color:var(--ink);
-    background: color-mix(in srgb, var(--accent-bg) 72%, transparent);
+    background: color-mix(in srgb, var(--accent-bg) 94%, transparent);
     box-shadow: var(--shadow-float);
     transform: translateY(-0.25rem);
 }
@@ -210,11 +205,6 @@ a.index-card:focus-visible,
     padding: 0.5rem 1rem;
     justify-self: start;
     margin-bottom: -0.5rem;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 }
 
 .index-card--eyebrow{
@@ -250,16 +240,11 @@ a.index-card:focus-visible,
     min-height: 0;
     overflow: hidden;
     padding: 1rem;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     transition: all 180ms ease;
 }
 
 .index-recent--item:hover{
-    background: color-mix(in srgb, var(--bg-raised) 72%, transparent);
+    background: color-mix(in srgb, var(--bg-raised) 94%, transparent);
     box-shadow: var(--shadow-float);
     transform: translateY(-0.25rem);
 }

@@ -214,7 +214,6 @@ onUnmounted(()=>{
   border-radius: 0.9rem;
   background: var(--surface);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;

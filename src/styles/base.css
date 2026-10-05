@@ -14,7 +14,7 @@
 :root {
   --bg: #f7eaf1;
   --bg-raised: #fff1f8;
-  --surface: rgb(255 245 251 / 80%);
+  --surface: rgb(255 245 251 / 94%);
   --ink: #3d2636;
   --ink-2: #735365;
   --ink-3: #a17b91;
@@ -38,7 +38,7 @@
 html.dark {
   --bg: #211820;
   --bg-raised: #30212e;
-  --surface: rgb(48 32 45 / 82%);
+  --surface: rgb(48 32 45 / 94%);
   --ink: #fff0fa;
   --ink-2: #e1bfd2;
   --ink-3: #b88fa8;
@@ -103,12 +103,6 @@ body {
 
 
 .comment{
-    padding: 1.5rem;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     font-size: 1.1rem;
     line-height: 1.85;
 }
@@ -146,11 +140,13 @@ body {
   color: var(--ink-2);
   padding: 1rem;
   font-size:1.25rem;
+}
+
+.card{
+  padding: 1.5rem;
   border-radius: 1.25rem;
-  background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
+  background: color-mix(in srgb, var(--bg-raised) 94%, transparent);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 body > header,
@@ -239,9 +235,6 @@ object {
   height: auto;
 }
 
-img {
-  border-radius: 10px;
-}
 
 code {
   font-size: 0.88em;
@@ -279,11 +272,6 @@ hr {
   margin-bottom: 0rem;
   overflow: hidden;
   padding: 1rem;
-  border-radius: 1.25rem;
-  background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   width: fit-content;
   max-width: 100%;
 }
@@ -324,12 +312,6 @@ hr {
 }
 
 .content{
-  padding: 1.5rem;
-  border-radius: 1.25rem;
-  background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   font-size: 1.1rem;
   line-height: 1.85;
   margin-top: 1rem;

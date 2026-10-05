@@ -19,7 +19,7 @@ import '../styles/categories.css'
   <nav class="categories-list" aria-label="Category list">
     <a
       th:each="category:${categories}"
-      class="categories-card"
+      class="card categories-card"
       th:href="@{${category.status.permalink}}"
       >
       <span

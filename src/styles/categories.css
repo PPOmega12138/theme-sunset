@@ -17,12 +17,6 @@
     transition: all 180ms ease;
 
     margin-top: 1rem;
-    padding: 1.5rem;
-    border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 }
 
 .categories-card__name{
@@ -47,5 +41,5 @@
 .categories-card:hover{
     transform: translateY(-0.25rem);
     box-shadow: var(--shadow-float);
-    background: color-mix(in srgb, var(--accent-bg) 72%, transparent);
+    background: color-mix(in srgb, var(--accent-bg) 94%, transparent);
 }

@@ -21,7 +21,7 @@ import "../styles/highlightjs.css"
 
 
 
-  <div class="post-heading">
+  <div class="card post-heading">
     <h1 th:text="${post.spec.title}"></h1>
     <p class="page-meta">
       <span th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
@@ -38,19 +38,19 @@ import "../styles/highlightjs.css"
 
   <div class="post-layout">
 
-    <div class="post-card">
+    <div class="card post-card">
       <div class="post-content js-content">
         <th:block th:utext="${post.content.content}"></th:block>
       </div>
     </div>
 
-    <aside class="post-toc" aria-labelledby="post-toc-title" hidden>
+    <aside class="card post-toc" aria-labelledby="post-toc-title" hidden>
       <p id="post-toc-title" class="post-toc__title">文章目录</p>
       <ol class="post-toc__list"></ol>
     </aside>
   </div>
 
-  <div class="comment">
+  <div class="card comment">
     <halo:comment
       group="content.halo.run"
       kind="Post"
@@ -62,8 +62,10 @@ import "../styles/highlightjs.css"
 
 <script>
 import { initHighlight } from "../features/highlightjs";
+import { initImagePreview } from "../features/mediaPreview";
 
 initHighlight(".js-content pre > code");
+initImagePreview(".js-content");
 
 const tocElement = document.querySelector(".post-toc");
 const tocList = tocElement?.querySelector(".post-toc__list");

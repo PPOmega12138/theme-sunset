@@ -8,7 +8,7 @@ import PostList from "../components/PostList.astro";
     <title th:text="|${category.spec.displayName} - ${site.title}|"></title>
   </Fragment>
 
-  <div class="page-heading">
+  <div class="card page-heading">
     <h1 th:text="${category.spec.displayName}"></h1>
     <p class="page-meta">
       <span th:text="|${posts.total} 篇文章|"></span>
@@ -28,7 +28,7 @@ import PostList from "../components/PostList.astro";
       class="pagination__prev">&larr; 较新</a
     >
     <span
-      class="pagination__info"
+      class="card pagination__info"
       th:text="|${posts.page} / ${posts.totalPages}|"></span>
     <a
       th:if="${posts.hasNext()}"

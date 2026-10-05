@@ -21,16 +21,12 @@
 
     margin-top: 1rem;
     border-radius: 0.75rem;
-    background: color-mix(in srgb, var(--bg-raised) 78%, transparent);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 }
 
 .tags-card__name{
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--ink-2);
+    color: var(--tag-color,var(--ink-2));
     transition: color 180ms ease;
 }
 
@@ -49,5 +45,5 @@
 .tags-card:hover{
     transform: translateY(-0.25rem);
     box-shadow: var(--shadow-float);
-    background: color-mix(in srgb, var(--accent-bg) 72%, transparent);
+    background: color-mix(in srgb, var(--accent-bg) 94%, transparent);
 }

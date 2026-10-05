@@ -20,9 +20,10 @@ import "../styles/tags.css"
   <div class="tags-list" role="list" aria-label="Tag list">
     <a
       th:each="tag : ${tags}"
-      class="tags-card"
+      class="card tags-card"
       role="listitem"
       th:href="@{${tag.status.permalink}}"
+      th:style="${tag.spec.color} ? |--tag-color:${tag.spec.color};| : null"
     >
       <span 
         th:text="${tag.spec.displayName}"

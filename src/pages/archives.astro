@@ -19,7 +19,7 @@ import '../styles/archives.css';
 
   <section class="archive-list" aria-label="Archive list">
     <th:block th:each="archive : ${archives.items}">
-      <section class="archive-year">
+      <section class="card archive-year">
         <h2 class="archive-year__title" th:text="${archive.year}"></h2>
 
         <th:block th:each="month : ${archive.months}">
@@ -63,7 +63,7 @@ import '../styles/archives.css';
       class="pagination__prev">&larr; 上一页</a
     >
     <span
-      class="pagination__info"
+      class="card pagination__info"
       th:text="|第 ${archives.page} 页  共 ${archives.totalPages} 页|"></span>
     <a
       th:if="${archives.hasNext()}"
