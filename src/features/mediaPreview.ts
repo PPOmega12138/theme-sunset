@@ -1,6 +1,6 @@
 import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.css";
-import "../styles/image-preview.css"
+import "../styles/media-preview.css"
 
 const initedContainers = new WeakSet<HTMLElement>();
 
@@ -48,3 +48,4 @@ export function initImagePreview(selector = ".js-content"){
 
   initedContainers.add(container);
 }
+
