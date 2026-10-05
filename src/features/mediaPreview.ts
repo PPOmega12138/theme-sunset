@@ -1,6 +1,18 @@
 import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.css";
+
+import Plyr from "plyr";
+import "plyr/dist/plyr.css";
+
 import "../styles/media-preview.css"
+
+declare global {
+  interface Window {
+    Plyr: typeof Plyr;
+  }
+}
+
+window.Plyr = Plyr;
 
 const initedContainers = new WeakSet<HTMLElement>();
 const initedMomentMediaContainers = new WeakSet<HTMLElement>();
