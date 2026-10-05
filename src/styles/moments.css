@@ -39,3 +39,8 @@
     margin-left: auto;
 }
 
+.moments-card__content p{
+    justify-content: center;
+    margin-bottom: 0rem;
+}
+
