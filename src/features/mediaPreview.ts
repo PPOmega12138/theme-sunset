@@ -14,39 +14,39 @@ const initedMomentMediaContainers = new WeakSet<HTMLElement>();
 
 let plyrLoading: Promise<void> | undefined;
 
-function loadPlyr():Promise<void>{
-  if (window.Plyr){
+function loadPlyr(): Promise<void> {
+  if (window.Plyr) {
     return Promise.resolve();
   }
 
-  if(!plyrLoading){
+  if (!plyrLoading) {
     plyrLoading = Promise.all([
       import("plyr"),
       import("plyr/dist/plyr.css"),
-    ]).then(([plyrModule]) =>{
+    ]).then(([plyrModule]) => {
       window.Plyr = plyrModule.default;
     });
   }
   return plyrLoading;
 }
 
-export function initImagePreview(selector = ".js-content"){
+export function initImagePreview(selector = ".js-content") {
   const container = document.querySelector<HTMLElement>(selector);
 
-  if (!container || initedContainers.has(container)){
+  if (!container || initedContainers.has(container)) {
     return;
   }
 
   const images = container.querySelectorAll<HTMLImageElement>("img:not([data-no-preview])",);
 
-  images.forEach((image)=> {
-    if (image.closest("a")){return;}
+  images.forEach((image) => {
+    if (image.closest("a")) { return; }
 
     const previewSrc =
       image.dataset.previewSrc ||
       image.src;
 
-    if (!previewSrc){
+    if (!previewSrc) {
       return;
     }
 
@@ -55,7 +55,7 @@ export function initImagePreview(selector = ".js-content"){
     link.className = "glightbox";
     link.dataset.gallery = "article";
 
-    if (image.alt){
+    if (image.alt) {
       link.dataset.title = image.alt;
     }
 
@@ -66,8 +66,8 @@ export function initImagePreview(selector = ".js-content"){
   GLightbox({
     selector: `${selector} .glightbox`,
     touchNavigation: true,
-    loop:true,
-    zoomable:true,
+    loop: true,
+    zoomable: true,
     openEffect: "zoom",
     closeEffect: "fade"
   });
@@ -75,13 +75,13 @@ export function initImagePreview(selector = ".js-content"){
   initedContainers.add(container);
 }
 
-export async function initMomentMediaPreview(selector = ".moments-list"){
+export async function initMomentMediaPreview(selector = ".moments-list") {
   const container = document.querySelector<HTMLElement>(selector);
 
-  if (!container || initedMomentMediaContainers.has(container)){return;}
+  if (!container || initedMomentMediaContainers.has(container)) { return; }
 
   const hasVideos = container.querySelector(".moments-card__video",);
-  if (hasVideos) {await loadPlyr();}
+  if (hasVideos) { await loadPlyr(); }
 
   const mediaGroups = container.querySelectorAll<HTMLElement>(".moments-card__media")
 
@@ -91,11 +91,11 @@ export async function initMomentMediaPreview(selector = ".moments-list"){
     const images = mediaGroup.querySelectorAll<HTMLImageElement>(".moments-card__img");
 
     images.forEach((image) => {
-      if (image.closest("a")){return;}
+      if (image.closest("a")) { return; }
 
       const previewSrc = image.dataset.previewSrc || image.src;
 
-      if (!previewSrc){return;}
+      if (!previewSrc) { return; }
 
       const link = document.createElement("a");
 
@@ -104,7 +104,7 @@ export async function initMomentMediaPreview(selector = ".moments-list"){
       link.dataset.gallery = galleryName;
       link.dataset.type = "image"
 
-      if (image.alt){
+      if (image.alt) {
         link.dataset.title = image.alt;
       }
 
@@ -114,19 +114,19 @@ export async function initMomentMediaPreview(selector = ".moments-list"){
 
     const videos = mediaGroup.querySelectorAll<HTMLVideoElement>(".moments-card__video",);
 
-    videos.forEach((video)=> {
-      if (video.closest("a")){return;}
+    videos.forEach((video) => {
+      if (video.closest("a")) { return; }
 
       const source = video.querySelector<HTMLSourceElement>("source")
 
       const videoSrc = video.currentSrc || video.src || source?.src;
 
-      if (!videoSrc){return;}
+      if (!videoSrc) { return; }
 
       const link = document.createElement("a");
 
       link.href = videoSrc;
-      link.className = "glightbox";
+      link.className = "glightbox moments-card__video-glightbox";
       link.dataset.gallery = galleryName;
       link.dataset.type = "video"
 
@@ -141,9 +141,9 @@ export async function initMomentMediaPreview(selector = ".moments-list"){
       video.setAttribute("aria-hidden", "true");
 
       const showFirstFrame = () => {
-        try{
-          if(video.duration >0 ){
-            video.currentTime = Math.min(0.01,video.duration);
+        try {
+          if (video.duration > 0) {
+            video.currentTime = Math.min(0.01, video.duration);
           }
         } catch {
 
@@ -164,7 +164,15 @@ export async function initMomentMediaPreview(selector = ".moments-list"){
 
       playIcon.className = "moments-card__play";
       playIcon.setAttribute("aria-hidden", "true");
-      playIcon.textContent = "▶";
+      playIcon.innerHTML = `
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M8 5.5v13l10-6.5-10-6.5Z"></path>
+        </svg>
+      `;
 
       video.replaceWith(link);
       link.append(video, playIcon);
