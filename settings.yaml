@@ -66,6 +66,13 @@ spec:
           value: 30
           min: 1
           max: 100
+        - $formkit: number
+          name: columns
+          label: "图片列数"
+          value: 5
+          max: 10
+          min: 2
+          help: "仅影响1100px以上的宽屏"
 
     - group: background
       label: "背景图"

@@ -38,6 +38,7 @@ import "../styles/photos.css"
   <div
     class="photos-list"
     th:if="${photos.items}"
+    th:style="|--photos-columns: ${theme.config.photos.columns};|"
   >
     <div
       class="photos-list__item"
