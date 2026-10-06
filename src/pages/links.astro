@@ -1,0 +1,55 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/link.css";
+---
+
+<Layout contentClass="prose" pageTitle="友链" pageSubtitle="LINKS">
+  <Fragment slot="head">
+    <title th:text="|友链 - ${site.title}|"></title>
+  </Fragment>
+
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${theme.config.background.links_bgimg}"
+      th:style="'background-image: url('+ ${theme.config.background.links_bgimg}+');'"
+    >
+    </div>
+  </Fragment>
+
+  <div class="link-list" th:if="${pluginFinder.available('PluginLinks')}">
+    <div class="link-group" th:each="group: ${groups}">
+      <h2 class="card link-group__name" th:text="${group.spec.displayName}">
+        未分组
+      </h2>
+
+      <div class="card link-card" th:each="link : ${group.links}">
+        <a
+          th:href="${link.spec.url}"
+          target="_blank"
+          class="link-card__overlay"></a>
+
+        <img
+          th:if="${link.spec.logo}"
+          th:src="${link.spec.logo}"
+          class="link-card__image"
+        />
+        <span th:text="${link.spec.displayName}" class="link-card__name"></span>
+        <span th:text="${link.spec.description}" class="link-card__description"
+        ></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card link-list__empty" th:if="${not pluginFinder.available('PluginLinks')}">链接管理插件未安装或未启用</div>
+
+
+<div class="card comment">
+  <halo:comment
+    group="content.halo.run"
+    kind="Plugin"
+    th:attr="name=${pluginName}"></halo:comment>
+</div>
+
+</Layout>

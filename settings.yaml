@@ -102,6 +102,12 @@ spec:
           label: "图库页背景图"
           accepts:
             - image/*
+        - $formkit: attachment
+          name: links_bgimg
+          label: "友链页背景图"
+          help: "此处设置/links页背景图，主题提供的自定义友链页采用页面封面图作为背景"
+          accepts:
+            - image/*
 
     - group: footer
       label: "页脚设置"
