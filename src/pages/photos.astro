@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout pageTitle="图库" pageSubtitle="PHOTOS">
+  <Fragment slot="head">
+    <title th:text="|图库 - ${site.title}|"></title>
+  </Fragment>
+
+  <div
+    class="photos-groups"
+  >
+    <a
+      class="photos-groups__item"
+      th:href="@{${photoUrl.list()}}"
+    > 全部图片</a>
+    <a
+      class="photos-groups__item"
+      th:each="group : ${groups}"
+      th:href="@{${photoUrl.list(group.metadata.name)}}"
+      th:text="${group.spec.displayName}"
+    ></a>
+  </div>
+
+  <div
+    class="photos-list"
+    th:if="${photos.items}"
+  >
+    <div
+      class="card photos-list__item"
+      th:each="photo: ${photos.items}"
+    >
+      <a
+        class="glightbox photos-item__link"
+        th:href="${photo.spec.url}"
+      >
+        <img
+          class="photos-item__img"
+          th:src="${photo.spec.cover ?: photo.spec.url}"
+        />
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="card photos-empty"
+    th:if="${#lists.isEmpty(photos.items)}"
+  >
+    暂无图片
+  </div>
+
+  <nav
+  class="pagination"
+  aria-label="图库分页"
+  th:if="${photos.hasPrevious() || photos.hasNext()}"
+>
+  <a
+    class="pagination__prev"
+    th:if="${photos.hasPrevious()}"
+    th:href="@{${photos.prevUrl}}"
+  >
+    &larr; 上一页
+  </a>
+
+  <span
+    class="pagination__info"
+    th:text="|第 ${photos.page} 页，共 ${photos.totalPages} 页|"
+  >
+  </span>
+
+  <a
+    class="pagination__next"
+    th:if="${photos.hasNext()}"
+    th:href="@{${photos.nextUrl}}"
+  >
+    下一页 &rarr;
+  </a>
+</nav>
+
+
+</Layout>
+
+
+<script>
+import { initImagePreview } from "../features/mediaPreview";
+initImagePreview(".photos-list");
+</script>
