@@ -3,9 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import "../styles/moments.css";
 ---
 
-<Layout pageTitle="动态" pageSubtitle="moments">
+<Layout pageTitleExpression="${title}" pageSubtitle="moments">
   <Fragment slot="head">
-    <title th:text="|动态 - ${site.title}|"></title>
+    <title th:text="|${title} - ${site.title}|"></title>
   </Fragment>
 
   <Fragment slot="background">
@@ -95,6 +95,7 @@ import "../styles/moments.css";
       </a>
     </div>
   </div>
+
 </Layout>
 
 <script>
