@@ -30,7 +30,7 @@ import "../styles/photos.css"
     th:if="${photos.items}"
   >
     <div
-      class="card photos-list__item"
+      class="photos-list__item"
       th:each="photo: ${photos.items}"
     >
       <a
@@ -66,7 +66,7 @@ import "../styles/photos.css"
   </a>
 
   <span
-    class="pagination__info"
+    class="card pagination__info"
     th:text="|第 ${photos.page} 页，共 ${photos.totalPages} 页|"
   >
   </span>
@@ -87,6 +87,7 @@ import "../styles/photos.css"
 <script>
 import { initImagePreview } from "../features/mediaPreview";
 initImagePreview(".photos-list");
+
 
 const currentGroup = new URLSearchParams(window.location.search).get("group") ?? "";
 

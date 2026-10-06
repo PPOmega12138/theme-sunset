@@ -138,8 +138,8 @@ body {
 .pagination__info {
   grid-column: 2;
   color: var(--ink-2);
-  padding: 1rem;
   font-size:1.25rem;
+  padding: 1rem;
 }
 
 .card{
