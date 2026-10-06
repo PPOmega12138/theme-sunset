@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/photos.css"
 ---
 
 <Layout pageTitle="图库" pageSubtitle="PHOTOS">
@@ -11,14 +12,16 @@ import Layout from "../layouts/Layout.astro";
     class="photos-groups"
   >
     <a
-      class="photos-groups__item"
+      class="card photos-groups__item"
       th:href="@{${photoUrl.list()}}"
+      data-photo-group=""
     > 全部图片</a>
     <a
-      class="photos-groups__item"
-      th:each="group : ${groups}"
-      th:href="@{${photoUrl.list(group.metadata.name)}}"
-      th:text="${group.spec.displayName}"
+      class="card photos-groups__item"
+      th:each="groupItem : ${groups}"
+      th:href="@{${photoUrl.list(groupItem.metadata.name)}}"
+      th:text="${groupItem.spec.displayName}"
+      th:attr="data-photo-group=${groupItem.metadata.name}"
     ></a>
   </div>
 
@@ -84,4 +87,12 @@ import Layout from "../layouts/Layout.astro";
 <script>
 import { initImagePreview } from "../features/mediaPreview";
 initImagePreview(".photos-list");
+
+const currentGroup = new URLSearchParams(window.location.search).get("group") ?? "";
+
+document.querySelectorAll<HTMLElement>(".photos-groups__item").forEach((item) => {
+  const isActive = item.dataset.photoGroup === currentGroup
+
+  item.classList.toggle("is-active",isActive);
+});
 </script>
