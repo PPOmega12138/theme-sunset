@@ -7,12 +7,10 @@ import UserButton from "./UserButton.vue";
   <div class="header-inner">
     <a class="brand" href="/">
       <span class="brand-logo">
-        <img
-          th:if="${not #strings.isEmpty(site.logo)}"
-          th:src="${site.logo}"
-        />
+        <img th:if="${not #strings.isEmpty(site.logo)}" th:src="${site.logo}" />
       </span>
-{/*     <span class="brand-titles">
+      {
+        /*     <span class="brand-titles">
         <strong class="brand-title" th:text="${site.title}">站点标题</strong>
         <small
           class="brand-subtitle"
@@ -20,8 +18,9 @@ import UserButton from "./UserButton.vue";
           th:text="${site.subtitle}"
         />
       </span>
-*/}
-    </a> 
+*/
+      }
+    </a>
 
     <nav
       th:with="menu = ${menuFinder.getPrimary()}"
@@ -36,27 +35,45 @@ import UserButton from "./UserButton.vue";
             th:text="${menuItem.status.displayName}"
           >
           </a>
-        <ul
-          class="submenu"
-          th:if="${not #lists.isEmpty(menuItem.children)}"
-        >
-          <li th:each="child:${menuItem.children}">
-            <a
-            th:href="@{${child.status.href}}"
-            th:target="${child.spec.target?.value}"
-            th:text="${child.status.displayName}"
-            >
-            </a>
-          </li>
-        </ul>
+          <ul class="submenu" th:if="${not #lists.isEmpty(menuItem.children)}">
+            <li th:each="child:${menuItem.children}">
+              <a
+                th:href="@{${child.status.href}}"
+                th:target="${child.spec.target?.value}"
+                th:text="${child.status.displayName}"
+              >
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
     <div class="header-actions">
+      <a
+        href="javascript:SearchWidget.open()"
+        title="搜索"
+        class="search-button"
+        th:if="${pluginFinder.available('PluginSearchWidget')}"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="1.2em"
+          height="1.2em"
+          aria-hidden="true"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
+          ></path>
+        </svg>
+      </a>
       <ThemeSwitcher client:load />
       <UserButton client:load>
-        <span
-          slot="fallback" class="user-button-fallback" aria-hidden="true"
+        <span slot="fallback" class="user-button-fallback" aria-hidden="true"
         ></span>
       </UserButton>
     </div>
@@ -65,10 +82,10 @@ import UserButton from "./UserButton.vue";
 
 <style>
   header {
-    background: color-mix(in srgb,var(--bg) 50%,transparent);
+    background: color-mix(in srgb, var(--bg) 50%, transparent);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    
+
     position: sticky;
     top: 0;
     z-index: 100;
@@ -76,7 +93,7 @@ import UserButton from "./UserButton.vue";
 
   .header-inner {
     display: grid;
-    grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: 2rem;
     width: 100%;
@@ -103,7 +120,7 @@ import UserButton from "./UserButton.vue";
     color: var(--accent);
   }
 
-  .brand-logo{
+  .brand-logo {
     display: grid;
     width: 2.5rem;
     height: 2.5rem;
@@ -113,23 +130,23 @@ import UserButton from "./UserButton.vue";
     color: var(--accent);
   }
 
-  .brand-logo img{
+  .brand-logo img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
 
-  .brand-titles{
+  .brand-titles {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .brand-title,.brand-subtitle{
+  .brand-title,
+  .brand-subtitle {
     margin: 0;
   }
-
 
   nav {
     display: flex;
@@ -137,7 +154,6 @@ import UserButton from "./UserButton.vue";
     justify-self: center;
     gap: 0.2rem;
   }
-
 
   .header-actions {
     display: flex;
@@ -163,7 +179,8 @@ import UserButton from "./UserButton.vue";
     pointer-events: none;
   }
 
-  nav :global(.menu-list),nav :global(.submenu){
+  nav :global(.menu-list),
+  nav :global(.submenu) {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -186,18 +203,20 @@ import UserButton from "./UserButton.vue";
     display: block;
     color: var(--ink-2);
     text-decoration: none;
-  } 
+  }
 
   nav :global(.menu-link) {
-  padding: 0.3rem 0.65rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  transition: color 0.15s ease, background 0.15s ease;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
   }
-  
+
   nav :global(.menu-link:hover) {
-  color: var(--ink);
-  background: var(--bg-raised);
+    color: var(--ink);
+    background: var(--bg-raised);
   }
 
   nav :global(.submenu) {
@@ -235,7 +254,6 @@ import UserButton from "./UserButton.vue";
     background: var(--bg-raised);
   }
 
-
   nav :global(.menu-item:hover > .submenu),
   nav :global(.menu-item:focus-within > .submenu) {
     opacity: 1;
@@ -243,6 +261,23 @@ import UserButton from "./UserButton.vue";
     pointer-events: auto;
     transform: translate(-50%, 0);
     transition-delay: 0s;
+  }
+
+  .search-button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: all 180ms ease;
+  }
+
+  .search-button:hover,
+  .search-button:focus-visible {
+    color: var(--ink);
+    background: var(--bg-raised);
   }
 
   @media (max-width: 680px) {
