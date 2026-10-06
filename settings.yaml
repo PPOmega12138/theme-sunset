@@ -56,6 +56,16 @@ spec:
           name: motto
           label: 首页一句话
           value: ""
+    
+    - group: photos
+      label: "图库设置"
+      formSchema:
+        - $formkit: number
+          name: page_size
+          label: "每页图片数量"
+          value: 30
+          min: 1
+          max: 100
 
     - group: background
       label: "背景图"
@@ -87,7 +97,7 @@ spec:
             - image/*
 
     - group: footer
-      label: "页脚"
+      label: "页脚设置"
       formSchema:
         - $formkit: text
           name: icp

@@ -23,13 +23,13 @@ import "../styles/photos.css"
   >
     <a
       class="card photos-groups__item"
-      th:href="@{${photoUrl.list()}}"
+      th:href="@{${photoUrl.list('',1,theme.config.photos.page_size)}}"
       data-photo-group=""
     > 全部图片</a>
     <a
       class="card photos-groups__item"
       th:each="groupItem : ${groups}"
-      th:href="@{${photoUrl.list(groupItem.metadata.name)}}"
+      th:href="@{${photoUrl.list(groupItem.metadata.name,1,theme.config.photos.page_size)}}"
       th:text="${groupItem.spec.displayName}"
       th:attr="data-photo-group=${groupItem.metadata.name}"
     ></a>
