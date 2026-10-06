@@ -8,6 +8,16 @@ import "../styles/photos.css"
     <title th:text="|图库 - ${site.title}|"></title>
   </Fragment>
 
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${not #strings.isEmpty(theme.config.background.photos_bgimg)}"
+      th:style="'background-image: url('+ ${theme.config.background.photos_bgimg}+');'"
+    >
+    </div>
+  </Fragment>
+
   <div
     class="photos-groups"
   >

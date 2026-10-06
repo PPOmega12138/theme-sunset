@@ -80,6 +80,11 @@ spec:
           label: "动态（瞬间）页背景图"
           accepts:
             - image/*
+        - $formkit: attachment
+          name: photos_bgimg
+          label: "图库页背景图"
+          accepts:
+            - image/*
 
     - group: footer
       label: "页脚"
