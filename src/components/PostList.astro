@@ -9,10 +9,18 @@
     <a class="post-link__overlay" th:href="@{${post.status.permalink}}"></a>
     <div class="post-card">
       <h2 class="post-card__title" th:text="${post.spec.title}"></h2>
-      <p
-        class="post-card__date"
-        th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
-      >
+      <p class="post-meta">
+        <span th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
+        ></span>
+        <a
+          th:if="${not #lists.isEmpty(post.categories)}"
+          th:href="@{${post.categories[0].status.permalink}}"
+        >
+          <span th:text="${post.categories[0].spec.displayName}"></span>
+        </a>
+        <a th:if="${post.owner}" th:href="@{${post.owner.permalink}}">
+          <span th:text="${post.owner.displayName}"></span>
+        </a>
       </p>
       <p class="post-card__excerpt" th:text="${post.status.excerpt}"></p>
     </div>
@@ -82,15 +90,16 @@
 
   .post-card {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     display: grid;
     padding: 0.75rem;
     width: 100%;
+    pointer-events: none;
   }
 
   .post-link__overlay {
     position: absolute;
-    z-index: 3;
+    z-index: 2;
     inset: 0;
 
     border-radius: inherit;
@@ -106,6 +115,7 @@
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    transition: all 180ms ease;
   }
   .post-card__date {
     font-size: 0.75rem;
@@ -126,5 +136,33 @@
   }
   .post-item:hover .post-card__title {
     color: var(--accent);
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0rem;
+    color: var(--ink-3);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+
+  .post-meta a{
+    text-decoration: none;
+    color: var(--ink-3);
+
+    position: relative;
+    pointer-events: auto;
+    transition: all 180ms ease;
+  }
+
+  .post-meta a:hover{
+    color: var(--accent);
+  }
+
+  .post-card:has(.post-meta:hover) .post-card__title{
+    color: var(--ink);
   }
 </style>
