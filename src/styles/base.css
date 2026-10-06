@@ -299,11 +299,10 @@ hr {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0rem;
   color: var(--ink-3);
   font-size: 0.78rem;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .page-content {

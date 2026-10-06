@@ -33,6 +33,14 @@ import "../styles/highlightjs.css"
         <span 
           th:text="${post.categories[0].spec.displayName}"></span>
       </a>
+      <a
+        th:if="${post.owner}"
+        th:href="@{${post.owner.permalink}}"
+      >
+        <span
+          th:text="${post.owner.displayName}"
+        ></span>
+      </a>
     </p>
   </div>
 
