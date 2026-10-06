@@ -114,6 +114,9 @@
     color: var(--accent);
 }
 
+.link-list__empty{
+    margin-top: 1rem;
+}
 
 @media (max-width: 720px) {
   .link-card {
