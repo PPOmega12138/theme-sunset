@@ -21,7 +21,7 @@ spec:
         - $formkit: color
           name: main_color
           label: "主题色"
-          value: "#ff66bb"
+          value: "#ffb0fa"
         - $formkit: color
           name: accent_color
           label: "强调色"
