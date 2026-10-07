@@ -17,7 +17,7 @@
   --surface: color-mix(in srgb, var(--main-color) 25%, white);
   --ink: color-mix(in srgb, var(--main-color) 22%, black);
   --ink-2: color-mix(in srgb, var(--main-color) 36%, black);
-  --ink-3: color-mix(in srgb, var(--main-color) 52%, white);
+  --ink-3: color-mix(in srgb, var(--main-color) 70%, black);
   --rule: color-mix(in srgb, var(--main-color) 24%, white);
   --shadow-color: color-mix(in srgb, var(--main-color) 30%, transparent);
   --accent-soft: color-mix(in srgb, var(--accent) 28%, transparent);
