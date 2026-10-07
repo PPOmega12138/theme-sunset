@@ -1,0 +1,48 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout contentClass="error-page">
+  <Fragment slot="head">
+    <title th:text="|出错啦 - ${site.title}|"></title>
+  </Fragment>
+
+  <div class="card error-info">
+    <h2 class="error-title" th:text="${error.status}"></h2>
+    <div class="error-info">
+      <span
+        th:text="|${#strings.defaultString(error.title, 'Internal server error')} : ${error.detail}|"
+        class="error-info--title"
+      >
+      </span>
+  </div>
+</Layout>
+
+<style>
+  :global(.layout-main) {
+    display: flex;
+  }
+
+  :global(.error-page) {
+    flex: 1;
+    place-items: center;
+  }
+
+  .error-info {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    place-items: left;
+  }
+
+  .error-title {
+    place-self: center;
+    font-size: 2rem;
+  }
+
+  .error-info--title {
+    margin-bottom: 0rem;
+    color: #ff0000;
+  }
+</style>
