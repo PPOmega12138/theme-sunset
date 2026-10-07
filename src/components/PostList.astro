@@ -70,6 +70,7 @@
     display: block;
     object-fit: cover;
     object-position: 50% 20%;
+    transition: all 180ms ease;
   }
 
   .post-item--cover::after {
@@ -164,5 +165,9 @@
 
   .post-card:has(.post-meta:hover) .post-card__title{
     color: var(--ink);
+  }
+
+  .post-item:has(.post-link__overlay:hover) .post-card__image{
+    transform: scale(1.05);
   }
 </style>
