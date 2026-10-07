@@ -21,7 +21,7 @@ const hasHeading = Boolean(pageTitle || pageTitleExpression);
   lang="en"
   class="theme-sunset"
   th:attr="data-default-theme=${theme.config.appearance.color_scheme}"
-  th:style="|--accent:${theme.config.appearance.accent_color ?: '#cf713c'}|"
+  th:style="|--main-color:${theme.config.appearance.main_color ?: '#ff6bb'};--accent:${theme.config.appearance.accent_color ?: '#c43d83'}|"
 >
   <head>
     <meta charset="utf-8" />

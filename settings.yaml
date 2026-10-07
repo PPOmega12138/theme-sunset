@@ -19,6 +19,10 @@ spec:
             - label: "深色"
               value: dark
         - $formkit: color
+          name: main_color
+          label: "主题色"
+          value: "#ff66bb"
+        - $formkit: color
           name: accent_color
           label: "强调色"
           value: "#c43d83"

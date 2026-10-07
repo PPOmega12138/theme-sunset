@@ -12,13 +12,14 @@
 }
 
 :root {
-  --bg: #f7eaf1;
-  --bg-raised: #fff1f8;
-  --surface: rgb(255 245 251 / 94%);
-  --ink: #3d2636;
-  --ink-2: #735365;
-  --ink-3: #a17b91;
-  --rule: #eacbdc;
+  --bg: color-mix(in srgb, var(--main-color) 10%, white);
+  --bg-raised: color-mix(in srgb, var(--main-color) 5%, white);
+  --surface: color-mix(in srgb, var(--main-color) 25%, white);
+  --ink: color-mix(in srgb, var(--main-color) 22%, black);
+  --ink-2: color-mix(in srgb, var(--main-color) 36%, black);
+  --ink-3: color-mix(in srgb, var(--main-color) 52%, white);
+  --rule: color-mix(in srgb, var(--main-color) 24%, white);
+  --shadow-color: color-mix(in srgb, var(--main-color) 30%, transparent);
   --accent-soft: color-mix(in srgb, var(--accent) 28%, transparent);
   --accent-bg: color-mix(in srgb, var(--accent) 14%, var(--bg-raised));
   --sunset: color-mix(in srgb, var(--accent) 82%, var(--ink));
@@ -36,14 +37,13 @@
 }
 
 html.dark {
-  --bg: #211820;
-  --bg-raised: #30212e;
-  --surface: rgb(48 32 45 / 94%);
-  --ink: #fff0fa;
-  --ink-2: #e1bfd2;
-  --ink-3: #b88fa8;
-  --rule: #513948;
-  --accent: #f09a57;
+  --bg: color-mix(in srgb, var(--main-color) 35%, black);
+  --bg-raised: color-mix(in srgb, var(--main-color) 25%, black);
+  --surface: color-mix(in srgb, var(--main-color) 30%, black);
+  --ink: color-mix(in srgb, var(--main-color) 7%, white);
+  --ink-2: color-mix(in srgb, var(--main-color) 20%, white);
+  --ink-3: color-mix(in srgb, var(--main-color) 42%, white);
+  --rule: color-mix(in srgb, var(--main-color) 32%, black);
   --accent-soft: color-mix(in srgb, var(--accent) 38%, transparent);
   --accent-bg: color-mix(in srgb, var(--accent) 24%, var(--bg-raised));
   --sunset: color-mix(in srgb, var(--accent) 82%, var(--ink));
@@ -93,7 +93,7 @@ body {
 }
 
 .site-background::before{
-  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  background: color-mix(in srgb, var(--bg) 30%, transparent);
 }
 
 .site-background::after{
