@@ -120,6 +120,12 @@
   padding-left: 1.4rem;
 }
 
+.post-toc__item a.is-active{
+  color: var(--accent);
+  background: var(--accent-bg);
+  font-weight: 700;
+}
+
 @media (max-width: 1280px) {
   .post-layout {
     width: 100%;

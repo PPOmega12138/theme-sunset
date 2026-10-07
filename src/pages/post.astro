@@ -79,6 +79,9 @@ const tocElement = document.querySelector(".post-toc");
 const tocList = tocElement?.querySelector(".post-toc__list");
 const headings = document.querySelectorAll(".post-content h2, .post-content h3, .post-content h1");
 
+
+const headingLinks = new Map()
+
 if (tocElement && tocList && headings.length > 0) {
   headings.forEach((heading, index) => {
     const title = heading.textContent?.trim();
@@ -114,10 +117,26 @@ if (tocElement && tocList && headings.length > 0) {
 
     item.append(link);
     tocList.append(item);
+
+    headingLinks.set(heading,link);
   });
 
   tocElement.hidden = false;
 }
 
+const updateActiveHeading = () => {
+  let activeHeading = headingLinks.keys().next().value;
+  for (const heading of headingLinks.keys()){
+    if (heading.getBoundingClientRect().top <= 120){
+      activeHeading = heading;
+    }else{break;}
+  }
 
+  headingLinks.forEach((link,heading) => {
+    link.classList.toggle("is-active",heading === activeHeading);
+  })
+}
+
+updateActiveHeading();
+window.addEventListener("scroll", updateActiveHeading);
 </script>
