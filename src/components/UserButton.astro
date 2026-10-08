@@ -1,0 +1,285 @@
+---
+import UserIcon from "~icons/mingcute/user-3-line";
+---
+
+<div class="user-button">
+  <div class="user-avatar user-avatar-loading" aria-busy="true"></div>
+
+  <div class="user-menu" hidden>
+    <button
+      class="user-avatar user-avatar--trigger"
+      type="button"
+      aria-expanded="false"
+      aria-haspopup="menu"
+    >
+      <img class="user-avatar__img" hidden />
+      <span class="user-avatar__label" hidden="false"></span>
+    </button>
+
+    <div class="user-menu__menu" role="menu">
+      <p class="user-menu__name"></p>
+      <a href="/console" target="_blank">控制台</a>
+      <a href="/uc" target="_blank">用户信息</a>
+      <a class="user-menu__logout" href="/logout">登出</a>
+    </div>
+  </div>
+
+  <a
+    class="user-avatar user-avatar-login"
+    href="/login"
+    aria-label="登录"
+    title="登录"
+    hidden
+  >
+    <UserIcon />
+  </a>
+</div>
+
+<script>
+  import type { DetailedUser } from "@halo-dev/api-client";
+
+  const root = document.querySelector<HTMLElement>(".user-button");
+  const loading = root?.querySelector<HTMLElement>(".user-avatar-loading");
+  const menu = root?.querySelector<HTMLElement>(".user-menu");
+  const login = root?.querySelector<HTMLElement>(".user-avatar-login");
+  const trigger = root?.querySelector<HTMLButtonElement>(
+    ".user-avatar--trigger",
+  );
+  const dropdown = root?.querySelector<HTMLElement>(".user-menu__menu");
+  const avatar = root?.querySelector<HTMLImageElement>(".user-avatar__img");
+  const name = root?.querySelector<HTMLElement>(".user-menu__name");
+  const label = root?.querySelector<HTMLElement>(".user-avatar__label");
+
+  async function loadUser() {
+    try {
+      const response = await fetch(
+        "/apis/api.console.halo.run/v1alpha1/users/-",
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to load user");
+      }
+
+      const data = (await response.json()) as DetailedUser;
+      const user = data.user;
+      const isAnonymous = user.metadata.name === "anonymousUser";
+
+      if (isAnonymous) {
+        if (login) login.hidden = false;
+        return;
+      }
+
+      const displayName =
+        user.spec.displayName || user.metadata.name || "Account";
+      const avatarSrc = user.spec.avatar || "";
+
+      if (name) name.textContent = displayName;
+
+      trigger?.setAttribute("aria-label", displayName);
+
+      if (label) label.textContent = displayName.charAt(0).toUpperCase();
+      if (avatarSrc && avatar) {
+        avatar.src = avatarSrc;
+        avatar.hidden = false;
+        if (label) label.hidden = true;
+      }
+
+      if (menu) menu.hidden = false;
+    } catch {
+      if (login) login.hidden = false;
+    } finally {
+      loading?.remove();
+    }
+  }
+
+  let closeTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function openMenu() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = undefined;
+    }
+
+    dropdown?.classList.add("is-open");
+    trigger?.setAttribute("aria-expanded", "true");
+  }
+
+  function closeMenu() {
+    if (closeTimer) clearTimeout(closeTimer);
+
+    closeTimer = setTimeout(() => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = undefined;
+      }
+      dropdown?.classList.remove("is-open");
+      trigger?.setAttribute("aria-expanded", "false");
+    }, 200);
+  }
+
+  menu?.addEventListener("mouseenter", openMenu);
+  menu?.addEventListener("mouseleave", closeMenu);
+  menu?.addEventListener("focusin", openMenu);
+  menu?.addEventListener("focusout", (event) => {
+    const nextElement = event.relatedTarget as Node | null;
+
+    if (!menu.contains(nextElement)) closeMenu();
+  });
+
+  trigger?.addEventListener("click", () => {
+    const isOpen = trigger.getAttribute("aria-expanded") === "true";
+
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  menu?.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+      trigger?.focus();
+    }
+  });
+
+  loadUser();
+</script>
+
+<style scoped>
+  .user-menu {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .user-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: var(--bg-raised);
+    color: var(--ink);
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .user-avatar--trigger {
+    cursor: pointer;
+    transition:
+      box-shadow 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .user-avatar--trigger:hover,
+  .user-avatar--trigger:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-soft);
+    transform: translateY(-1px);
+  }
+
+  .user-avatar-login {
+    text-decoration: none;
+  }
+
+  .user-avatar__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .user-avatar-loading {
+    background: linear-gradient(
+      90deg,
+      var(--bg-raised) 0%,
+      color-mix(in srgb, var(--bg-raised) 78%, var(--ink) 22%) 50%,
+      var(--bg-raised) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
+  }
+
+  .user-menu__menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 120;
+    display: grid;
+    min-width: 11rem;
+    padding: 0.45rem;
+    border: 1px solid var(--rule);
+    border-radius: 0.9rem;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-0.35rem);
+    transition:
+      opacity 0.16s ease,
+      transform 0.16s ease,
+      visibility 0.16s;
+  }
+
+  .user-menu__menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .user-menu__name {
+    margin: 0;
+    padding: 0.45rem 0.6rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    font-size: 0.88rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  .user-menu__menu a {
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.55rem;
+    color: var(--ink-2);
+    font-size: 0.88rem;
+    text-decoration: none;
+  }
+
+  .user-menu__menu a:hover,
+  .user-menu__menu a:focus-visible {
+    outline: none;
+    background: var(--bg-raised);
+    color: var(--ink);
+  }
+
+  .user-menu__logout {
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .user-menu__logout:hover {
+    outline: none;
+    background: var(--bg-raised);
+    color: var(--ink);
+  }
+
+  .user-button [hidden]{
+    display: none;
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
+</style>

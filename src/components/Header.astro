@@ -1,6 +1,6 @@
 ---
 import ThemeSwitcher from "./ThemeSwitcher.astro";
-import UserButton from "./UserButton.vue";
+import UserButton from "./UserButton.astro";
 import MingcuteSearchLine from "~icons/mingcute/search-line";
 ---
 
@@ -61,10 +61,7 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
       </a>
 
       <ThemeSwitcher />
-      <UserButton client:load>
-        <span slot="fallback" class="user-button-fallback" aria-hidden="true"
-        ></span>
-      </UserButton>
+      <UserButton />
     </div>
   </div>
 </header>
