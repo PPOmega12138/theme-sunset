@@ -3,9 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import "../styles/link.css";
 ---
 
-<Layout contentClass="prose" pageTitle="友链" pageSubtitle="LINKS">
+<Layout contentClass="prose" pageTitleExpression="${linksTitle}" pageSubtitle="LINKS">
   <Fragment slot="head">
-    <title th:text="|友链 - ${site.title}|"></title>
+    <title th:text="|${linksTitle} - ${site.title}|"></title>
   </Fragment>
 
   <Fragment slot="background">
