@@ -2,6 +2,8 @@
 import ThemeSwitcher from "./ThemeSwitcher.astro";
 import UserButton from "./UserButton.astro";
 import MingcuteSearchLine from "~icons/mingcute/search-line";
+import MenuLine from "~icons/mingcute/menu-line";
+import CloseLine from "~icons/mingcute/close-line";
 ---
 
 <header>
@@ -26,6 +28,8 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
     <nav
       th:with="menu = ${menuFinder.getPrimary()}"
       aria-label="Main navigation"
+      class="header-nav"
+      id="site-navigation"
     >
       <ul class="menu-list">
         <li th:each="menuItem: ${menu.menuItems}" class="menu-item">
@@ -50,7 +54,6 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
       </ul>
     </nav>
     <div class="header-actions">
-
       <a
         href="javascript:SearchWidget.open()"
         title="搜索"
@@ -62,6 +65,17 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
 
       <ThemeSwitcher />
       <UserButton />
+
+      <button
+        type="button"
+        class="menu-toggle"
+        aria-label="open menu"
+        aria-controls="site-navigation"
+        aria-expanded="false"
+      >
+        <MenuLine class="menu-open-icon" aria-hidden="true" />
+        <CloseLine class="menu-close-icon" aria-hidden="true" />
+      </button>
     </div>
   </div>
 </header>
@@ -165,33 +179,33 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
     pointer-events: none;
   }
 
-  nav :global(.menu-list),
-  nav :global(.submenu) {
+  nav .menu-list,
+  nav .submenu {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  nav :global(.menu-list) {
+  nav .menu-list {
     display: flex;
     align-items: center;
     gap: 0.2rem;
   }
 
-  nav :global(.menu-item) {
+  nav .menu-item {
     position: relative;
     padding-bottom: 0.5rem;
     margin-bottom: -0.5rem;
   }
 
-  nav :global(.menu-link),
-  nav :global(.submenu a) {
+  nav .menu-link,
+  nav .submenu a {
     display: block;
     color: var(--ink-2);
     text-decoration: none;
   }
 
-  nav :global(.menu-link) {
+  nav .menu-link {
     padding: 0.3rem 0.65rem;
     border-radius: 6px;
     font-size: 0.9rem;
@@ -200,12 +214,12 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
       background 0.15s ease;
   }
 
-  nav :global(.menu-link:hover) {
+  nav .menu-link:hover {
     color: var(--ink);
     background: var(--bg-raised);
   }
 
-  nav :global(.submenu) {
+  nav .submenu {
     position: absolute;
     top: 100%;
     left: 50%;
@@ -227,21 +241,21 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
       pointer-events 0s linear 0.36s;
   }
 
-  nav :global(.submenu a) {
+  nav .submenu a {
     padding: 0.5rem 0.6rem;
     border-radius: 0.55rem;
     font-size: 0.88rem;
     white-space: nowrap;
   }
 
-  nav :global(.submenu a:hover),
-  nav :global(.submenu a:focus-visible) {
+  nav .submenu a:hover,
+  nav .submenu a:focus-visible {
     color: var(--ink);
     background: var(--bg-raised);
   }
 
-  nav :global(.menu-item:hover > .submenu),
-  nav :global(.menu-item:focus-within > .submenu) {
+  nav .menu-item:hover > .submenu,
+  nav .menu-item:focus-within > .submenu {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -266,25 +280,118 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
     background: var(--bg-raised);
   }
 
-  @media (max-width: 680px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  @media (max-width: 780px) {
     .header-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      height: auto;
-      padding: 1rem 0;
-      gap: 0.75rem;
+      grid-template-columns: auto 1fr auto;
+      height: 58px;
+      gap: 0.5rem;
     }
 
     nav {
-      flex-wrap: wrap;
-      gap: 0.1rem;
-      margin-left: -0.65rem;
-      flex: initial;
+      position: absolute;
+      top: 100%;
+      left: 20%;
+      right: 0;
+      display: block;
+
+      visibility: hidden;
+      pointer-events: none;
+      opacity: 0;
+
+      transition: all 180ms ease;
+      transform: translateY(-0.5rem);
+
+      justify-self: stretch;
+      margin: 0;
+      background: color-mix(in srgb, var(--surface) 95%, transparent);
+      border-radius: 0.9rem;
+      max-height: calc(100dvh - 58px - 0.5rem);
+      overflow-y: auto;
+    }
+
+    nav .menu-link {
+      width: 100%;
+      text-align: left;
+    }
+    nav .menu-list {
+      display: grid;
+      width: 100%;
+      justify-items: stretch;
+      border-radius: 0.75rem;
+    }
+
+    nav .menu-item {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    nav.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
     }
 
     .header-actions {
       margin-left: 0;
+    }
+
+    nav .submenu,
+    nav .menu-item:hover > .submenu,
+    nav .menu-item:focus-within > .submenu {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+
+      transition: none;
+      transform: none;
+
+      background: none;
+      box-shadow: none;
+
+      margin-left: 0.5rem;
+    }
+
+    .menu-toggle {
+      display: grid;
+      place-items: center;
+      background: transparent;
+      border: none;
+      border-radius: 50%;
+      height: 34px;
+      width: 34px;
+      padding: 0;
+      border: 0;
+      line-height: 0;
+      color: var(--ink-2);
+      cursor:pointer
+
+      transition: all 180ms ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] {
+      background: var(--bg-raised);
+    }
+
+    .menu-close-icon {
+      display: none;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-open-icon {
+      display: none;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-close-icon {
+      display: block;
+    }
+
+    nav .menu-list {
+      display: grid;
     }
   }
 
@@ -298,3 +405,32 @@ import MingcuteSearchLine from "~icons/mingcute/search-line";
     }
   }
 </style>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const menu = document.querySelector<HTMLElement>(".header-nav");
+
+  function openMenu() {
+    menu?.classList.add("is-open");
+    button?.setAttribute("aria-expanded", "true");
+  }
+
+  function closeMenu() {
+    menu?.classList.remove("is-open");
+    button?.setAttribute("aria-expanded", "false");
+  }
+
+  button?.addEventListener("click", () => {
+    if (button.getAttribute("aria-expanded") === "true") {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  menu?.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).closest("a")) {
+      closeMenu();
+    }
+  });
+</script>
