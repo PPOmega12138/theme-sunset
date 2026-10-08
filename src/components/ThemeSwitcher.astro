@@ -1,0 +1,76 @@
+---
+import MingcuteMoonLine from "~icons/mingcute/moon-line";
+import MingcuteSunLine from "~icons/mingcute/sun-line";
+---
+
+<button 
+  class="theme-toggle" 
+  type="button"
+  aria-label="switch to dark mode"
+>
+  <span class="sun">
+    <MingcuteSunLine aria-hidden="true" />
+  </span>
+  <span class="moon">
+    <MingcuteMoonLine aria-hidden="true" />
+  </span>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>(".theme-toggle");
+
+  button?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    updateButton(isDark);
+  });
+
+  function updateButton(isDark: boolean) {
+    if (!button) return;
+
+    button.setAttribute("aria-pressed", String(isDark));
+    button.setAttribute(
+      "aria-label",
+      isDark ? "switch to bright mode" : "switch to dark mode",
+    );
+    
+    updateButton(document.documentElement.classList.contains("dark"));
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .theme-toggle:hover {
+    background: var(--bg-raised);
+    color: var(--ink);
+  }
+
+  .sun {
+    display: none;
+  }
+  :global(html.dark) .moon {
+    display: none;
+  }
+
+  :global(html.dark) .sun {
+    display: block;
+  }
+</style>
