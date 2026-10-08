@@ -1,6 +1,7 @@
 ---
 import ThemeSwitcher from "./ThemeSwitcher.vue";
 import UserButton from "./UserButton.vue";
+import MingcuteSearchLine from "~icons/mingcute/search-line";
 ---
 
 <header>
@@ -49,28 +50,16 @@ import UserButton from "./UserButton.vue";
       </ul>
     </nav>
     <div class="header-actions">
+
       <a
         href="javascript:SearchWidget.open()"
         title="搜索"
         class="search-button"
         th:if="${pluginFinder.available('PluginSearchWidget')}"
       >
-        <svg
-          viewBox="0 0 24 24"
-          width="1.2em"
-          height="1.2em"
-          aria-hidden="true"
-        >
-          <path
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
-          ></path>
-        </svg>
+        <MingcuteSearchLine aria-hidden="true" />
       </a>
+
       <ThemeSwitcher client:load />
       <UserButton client:load>
         <span slot="fallback" class="user-button-fallback" aria-hidden="true"
