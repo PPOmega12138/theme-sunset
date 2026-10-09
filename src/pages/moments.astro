@@ -84,7 +84,7 @@ import "../styles/moments.css";
         <span>&larr; 上一页</span>
       </a>
       <span
-        class="pagination__info"
+        class="card pagination__info"
         th:text="|第 ${moments.page} 页  共 ${moments.totalPages} 页|"></span>
       <a
         th:href="@{${moments.nextUrl}}"
