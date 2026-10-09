@@ -11,7 +11,13 @@ interface Props {
   pageSubtitleExpression?: string;
 }
 
-const { pageTitle, pageSubtitle, contentClass, pageTitleExpression, pageSubtitleExpression } = Astro.props;
+const {
+  pageTitle,
+  pageSubtitle,
+  contentClass,
+  pageTitleExpression,
+  pageSubtitleExpression,
+} = Astro.props;
 
 const hasHeading = Boolean(pageTitle || pageTitleExpression);
 ---
@@ -22,25 +28,33 @@ const hasHeading = Boolean(pageTitle || pageTitleExpression);
   class="theme-sunset"
   th:attr="data-default-theme=${theme.config.appearance.color_scheme}"
   th:style="|--main-color:${theme.config.appearance.main_color ?: '#ffb0fa'};--accent:${theme.config.appearance.accent_color ?: '#c43d83'}|"
+  data-color-scheme="auto"
 >
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <script is:inline>
       (function () {
+        var root = document.documentElement;
+        var configured = root.dataset.defaultTheme;
         var stored = localStorage.getItem("theme");
         var prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)",
         ).matches;
         var configured = document.documentElement.dataset.defaultTheme;
-        if (
-          stored === "dark" ||
-          (!stored &&
-            (configured === "dark" ||
-              (configured !== "light" && prefersDark)))
-        ) {
-          document.documentElement.classList.add("dark");
-        }
+
+        var colorScheme =
+          stored === "dark" || stored === "light"
+            ? stored
+            : configured === "dark" || configured === "light"
+              ? configured
+              : "auto";
+
+        var isDark =
+          colorScheme === "dark" || (colorScheme === "auto" && prefersDark);
+
+        root.classList.toggle("dark", isDark);
+        root.dataset.colorScheme = colorScheme;
       })();
     </script>
     <slot name="head" />
@@ -50,17 +64,26 @@ const hasHeading = Boolean(pageTitle || pageTitleExpression);
     <slot name="background" />
     <Header />
     <main class="layout-main">
-        {
-          hasHeading && (
-            <header class="card page-heading">
-              {(pageSubtitle || pageSubtitleExpression) && <p class="page-heading__subtitle" th:text={pageSubtitleExpression}>{pageSubtitle}</p>}
-              {(pageTitle || pageTitleExpression) && <h1 th:text={pageTitleExpression}>{pageTitle}</h1>}
-            </header>
-          )
-        }
-        <div class:list={["page-content", contentClass]}>
-          <slot />
-        </div>
+      {
+        hasHeading && (
+          <header class="card page-heading">
+            {(pageSubtitle || pageSubtitleExpression) && (
+              <p
+                class="page-heading__subtitle"
+                th:text={pageSubtitleExpression}
+              >
+                {pageSubtitle}
+              </p>
+            )}
+            {(pageTitle || pageTitleExpression) && (
+              <h1 th:text={pageTitleExpression}>{pageTitle}</h1>
+            )}
+          </header>
+        )
+      }
+      <div class:list={["page-content", contentClass]}>
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>
