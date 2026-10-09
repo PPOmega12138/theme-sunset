@@ -77,6 +77,11 @@ spec:
           max: 10
           min: 2
           help: "仅影响1100px以上的宽屏"
+        - $formkit: text
+          name: immich_url
+          label: "Immich地址"
+          placeholder: "https://photos.example.com/s/example"
+          help: "若要接入Immich图库请填写Immich共享图库地址，并使用自定义页面模板Immich。Immich服务器需要允许跨域访问"
 
     - group: background
       label: "背景图"
