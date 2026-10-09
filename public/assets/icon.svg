@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 750" role="img" aria-label="Personal website icon">
+  <defs>
+    <linearGradient id="bg" x1="5%" y1="4%" x2="94%" y2="91%">
+      <stop offset="0%" stop-color="#39D3F7"/>
+      <stop offset="37%" stop-color="#78A9E9"/>
+      <stop offset="72%" stop-color="#BB86E5"/>
+      <stop offset="100%" stop-color="#E36DDE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Transparent outside the rounded-square icon -->
+  <rect width="750" height="750" rx="178" fill="url(#bg)"/>
+
+  <!-- Stylized B -->
+  <path fill="#FEFEFE" fill-rule="evenodd" d="
+    M236 166
+    H430
+    C500 166 556 220 556 291
+    C556 319 548 344 534 363
+    C562 383 580 416 580 456
+    C580 529 528 586 461 586
+    H236
+    C213 586 195 568 195 545
+    V207
+    C195 184 213 166 236 166
+    Z
+
+    M280 250
+    V333
+    H430
+    C453 333 471 314 471 291
+    C471 268 453 250 430 250
+    H280
+    Z
+
+    M280 418
+    V502
+    H452
+    C476 502 495 483 495 460
+    C495 437 476 418 452 418
+    H280
+    Z
+  "/>
+</svg>
