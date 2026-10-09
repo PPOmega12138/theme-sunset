@@ -8,6 +8,16 @@ import PostList from "../components/PostList.astro";
     <title th:text="|${category.spec.displayName} - ${site.title}|"></title>
   </Fragment>
 
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${category.spec.cover}"
+      th:style="'background-image: url('+ ${category.spec.cover}+');'"
+    >
+    </div>
+  </Fragment>
+
   <div class="card page-heading">
     <h1 th:text="${category.spec.displayName}"></h1>
     <p class="page-meta">

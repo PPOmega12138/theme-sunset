@@ -15,6 +15,16 @@ import PostList from "../components/PostList.astro";
     </p>
   </div>
 
+  <Fragment slot="background">
+    <div
+      class="site-background"
+      aria-hidden="true"
+      th:if="${tag.spec.cover}"
+      th:style="'background-image: url('+ ${tag.spec.cover}+');'"
+    >
+    </div>
+  </Fragment>
+
   <PostList />
 
 
