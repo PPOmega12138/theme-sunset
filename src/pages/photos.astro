@@ -3,9 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import "../styles/photos.css"
 ---
 
-<Layout pageTitle="图库" pageSubtitle="PHOTOS">
+<Layout pageTitleExpression=${title} pageSubtitle="PHOTOS">
   <Fragment slot="head">
-    <title th:text="|图库 - ${site.title}|"></title>
+    <title th:text="|${title} - ${site.title}|"></title>
   </Fragment>
 
   <Fragment slot="background">
