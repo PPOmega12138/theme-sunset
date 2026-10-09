@@ -23,3 +23,6 @@ spec:
       - name: link
         description: 友链页模板
         file: link.html
+      - name: immich
+        description: Immich 图库页模板
+        file: immich.html
