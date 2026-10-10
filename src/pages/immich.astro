@@ -138,7 +138,7 @@ import "../styles/highlightjs.css"
 
     if(loadmore) loadmore.hidden = !hasMore;
 
-    if(!hasMore && container?.children.length === 0) loading?.remove;
+    if(!hasMore && container?.children.length === 0) loading?.remove();
 
     isLoading = false;
   }
@@ -154,7 +154,7 @@ import "../styles/highlightjs.css"
   if (!container || !sharedUrl) throw new Error("未配置 Immich 共享图库");
 
   const parsedPageSize = Number.parseInt(container.dataset.pageSize ?? '',10,);
-  const pageSize = Number.isNaN(parsedPageSize) ? 30 : parsedPageSize;
+  const pageSize = Number.isNaN(parsedPageSize) || parsedPageSize <= 0 ? 30 : parsedPageSize;
 
   let nextBucketIndex = 0;
   let assetBuffer: ImmichAsset[] = [];
