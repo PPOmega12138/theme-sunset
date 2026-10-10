@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import "../styles/photos.css";
 import "../styles/immich.css";
+import "../styles/highlightjs.css"
 ---
 
 <Layout pageTitleExpression="${singlePage.spec.title}" pageSubtitle="photos">
@@ -20,14 +21,14 @@ import "../styles/immich.css";
 
   <div
     th:utext="${singlePage.content.content}"
-    class="card content"
+    class="js-content card content"
     th:if="${not #strings.isEmpty(singlePage.content.content)}"
   >
   </div>
 
-  <div class="card immich-album__name"></div>
+  <div class="card immich-album__name">Album Loading...</div>
 
-  <div class="card immich-loading">Loading...</div>
+  <div class="card immich-loading">Images Loading...</div>
 
   <div
     class="photos-list"
@@ -35,12 +36,20 @@ import "../styles/immich.css";
     th:attr="data-shared-url=${theme.config.photos.immich_url}"
   >
   </div>
+
+  <div
+    class="card immich-loadmore"
+    hidden
+  >加载更多</div>
 </Layout>
 
 <script>
   import type { ImmichAlbum } from "../features/immichPhotos";
   import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
   import { initImagePreview } from "../features/mediaPreview";
+  import { initHighlight } from "../features/highlightjs";
+
+  initHighlight(".js-content pre > code")
 
   function addAlbumName(container: HTMLElement, album: ImmichAlbum) {
     container.textContent = album.name;
@@ -48,6 +57,8 @@ import "../styles/immich.css";
 
   function renderAssets(container: HTMLElement, assets: ImmichAsset[]) {
     const fragment = document.createDocumentFragment();
+    const batch = document.createElement("div");
+    batch.className = "immich-list__batch"
 
     for (const asset of assets) {
       if (!asset.isImage) continue;
@@ -70,6 +81,7 @@ import "../styles/immich.css";
         "load",
         () => {
           img.style.opacity = "1";
+          loading?.remove();
         },
         { once: true },
       );
@@ -80,13 +92,15 @@ import "../styles/immich.css";
       fragment.append(item);
     }
 
-    container.append(fragment);
+    batch.append(fragment)
+    container.append(batch);
   }
 
   async function loadNextBucket() {
     const bucket = buckets[nextBucketIndex];
 
     if (!bucket) {
+      if (loadmore) loadmore.hidden = true;
       return;
     }
 
@@ -95,11 +109,16 @@ import "../styles/immich.css";
     renderAssets(container, assets);
 
     nextBucketIndex += 1;
+
+    lightbox?.reload();
+    if (loadmore) loadmore.hidden = nextBucketIndex >= buckets.length;
   }
 
   const container = document.querySelector<HTMLElement>("[data-shared-url]");
   const sharedUrl = container?.dataset.sharedUrl;
   const albumName = document.querySelector<HTMLElement>(".immich-album__name");
+  const loading = document.querySelector<HTMLElement>(".immich-loading");
+  const loadmore = document.querySelector<HTMLElement>(".immich-loadmore")
 
   if (!container || !sharedUrl) throw new Error("未配置 Immich 共享图库");
 
@@ -114,8 +133,9 @@ import "../styles/immich.css";
   let nextBucketIndex = 1;
 
   renderAssets(container, assets);
+  if(loadmore) loadmore.hidden = nextBucketIndex >= buckets.length;
 
-  initImagePreview(".photos-list");
+  const lightbox = initImagePreview(".photos-list");
 
   const content = document.querySelector<HTMLElement>(".content");
 
@@ -126,4 +146,8 @@ import "../styles/immich.css";
   ) {
     content.remove();
   }
+
+  loadmore?.addEventListener("click", () => {
+    loadNextBucket();
+  })
 </script>

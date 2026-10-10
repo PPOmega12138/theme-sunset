@@ -18,3 +18,53 @@
     content: "";
     background: linear-gradient(90deg, color-mix(in srgb, var(--accent-soft) 78%, transparent),transparent);
 }
+
+.immich-loadmore{
+  width: fit-content;
+  align-content: center;
+  place-self: center;
+
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+
+  transition: all 180ms ease;
+
+  cursor: pointer;
+}
+
+.immich-loadmore:hover{
+  background: var(--accent-bg);
+  color: var(--accent);
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-float);
+}
+
+.photos-list[data-shared-url] {
+  column-count: initial;
+  column-gap: 0;
+}
+
+.immich-list__batch {
+  column-count: var(--photos-columns, 5);
+  column-gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 1100px) {
+  .immich-list__batch {
+    column-count: 4;
+  }
+}
+
+@media (max-width: 768px) {
+  .immich-list__batch {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .immich-list__batch {
+    column-count: 1;
+  }
+}

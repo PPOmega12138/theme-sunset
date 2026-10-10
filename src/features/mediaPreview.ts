@@ -109,6 +109,7 @@ export function initImagePreview(selector = ".js-content") {
   })
 
   initedContainers.add(container);
+  return lightbox;
 }
 
 export async function initMomentMediaPreview(selector = ".moments-list") {
