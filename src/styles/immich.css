@@ -1,0 +1,20 @@
+.immich-album__name{
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  padding: 0.25rem;
+  padding-left: 1rem;
+  margin-top: 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.immich-album__name::after{
+    flex: 1;
+    height: 3px;
+
+    content: "";
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-soft) 78%, transparent),transparent);
+}

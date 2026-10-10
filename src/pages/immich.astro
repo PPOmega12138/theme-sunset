@@ -1,6 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import "../styles/photos.css"
+import Layout from "../layouts/Layout.astro";
+import "../styles/photos.css";
+import "../styles/immich.css";
 ---
 
 <Layout pageTitleExpression="${singlePage.spec.title}" pageSubtitle="photos">
@@ -19,19 +20,28 @@ import "../styles/photos.css"
 
   <div th:utext="${singlePage.content.content}" class="card content"></div>
 
+  <div class="card immich-album__name"></div>
+
   <div
     class="photos-list"
     th:style="|--photos-columns: ${theme.config.photos.columns};|"
     th:attr="data-shared-url=${theme.config.photos.immich_url}"
-  >
-    
-  </div>
+  ></div>
+
+
 
 </Layout>
 
 <script>
-  import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
+  import type { ImmichAlbum } from "../features/immichPhotos";
+import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
   import { initImagePreview } from "../features/mediaPreview";
+
+  function addAlbumName(container:HTMLElement,
+    album: ImmichAlbum
+  ){
+    container.textContent = album.name;
+  }
 
   function renderAssets(
     container: HTMLElement,
@@ -88,6 +98,7 @@ import "../styles/photos.css"
 
   const container = document.querySelector<HTMLElement>("[data-shared-url]");
   const sharedUrl = container?.dataset.sharedUrl;
+  const albumName = document.querySelector<HTMLElement>(".immich-album__name");
 
   if (!container || !sharedUrl) throw new Error("未配置 Immich 共享图库");
 
@@ -99,6 +110,7 @@ import "../styles/photos.css"
 
   let nextBucketIndex = 1;
 
+  if (albumName) addAlbumName(albumName,album);
   renderAssets(container,assets);
 
   initImagePreview(".photos-list");
