@@ -52,9 +52,16 @@ import "../styles/photos.css"
 
       const img = document.createElement("img");
       img.className = "photos-item__img";
-      img.src = asset.thumbnailUrl;
       img.loading = "lazy";
       img.decoding = "async";
+      img.style.opacity = "0";
+      img.addEventListener(
+        "load",()=>{
+          img.style.opacity = "1";
+        },
+        { once: true },
+      );
+      img.src = asset.thumbnailUrl;
 
       link.append(img);
       item.append(link);
