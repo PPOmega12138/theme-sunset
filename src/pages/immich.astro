@@ -41,7 +41,7 @@ import "../styles/highlightjs.css"
   <div
     class="photos-list"
     th:style="|--photos-columns: ${theme.config.photos.columns};|"
-    th:attr="data-shared-url=${theme.config.photos.immich_url}"
+    th:attr="data-shared-url=${theme.config.photos.immich_url}, data-page-size=${theme.config.photos.immich_page_size}"
   >
   </div>
 
@@ -56,7 +56,6 @@ import "../styles/highlightjs.css"
   import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
   import { initImagePreview } from "../features/mediaPreview";
   import { initHighlight } from "../features/highlightjs";
-import { loadRenderers } from "astro:container";
 
   initHighlight(".js-content pre > code")
 
@@ -105,24 +104,46 @@ import { loadRenderers } from "astro:container";
     container.append(batch);
   }
 
-  async function loadNextBucket() {
-    const bucket = buckets[nextBucketIndex];
-    if(loadmore) loadmore.hidden=true;
+  async function loadNextPage() {
+    if (isLoading) return;
 
-    if (!bucket) {
-      if (loadmore) loadmore.hidden = true;
-      return;
+    isLoading = true;
+
+    if(loadmore) loadmore.hidden = true;
+
+    while(
+      assetBuffer.length < pageSize &&
+      nextBucketIndex < buckets.length
+    ){
+      const bucket = buckets[nextBucketIndex];
+      nextBucketIndex += 1;
+
+      const assets = await gallery.getBucketAssets(
+        album.id, bucket.timeBucket
+      );
+
+      assetBuffer.push(
+        ...assets.filter((asset) => asset.isImage)
+      )
     }
 
-    const assets = await gallery.getBucketAssets(album.id, bucket.timeBucket);
+    const assets = assetBuffer.splice(0,pageSize);
 
-    renderAssets(container, assets);
+    if(assets.length > 0){
+      renderAssets(container,assets);
+      lightbox?.reload();
+    }
 
-    nextBucketIndex += 1;
+    const hasMore = assetBuffer.length > 0 || nextBucketIndex < buckets.length;
 
-    lightbox?.reload();
-    if (loadmore) loadmore.hidden = nextBucketIndex >= buckets.length;
+    if(loadmore) loadmore.hidden = !hasMore;
+
+    if(!hasMore && container?.children.length === 0) loading?.remove;
+
+    isLoading = false;
   }
+
+
 
   const container = document.querySelector<HTMLElement>("[data-shared-url]");
   const sharedUrl = container?.dataset.sharedUrl;
@@ -132,20 +153,22 @@ import { loadRenderers } from "astro:container";
 
   if (!container || !sharedUrl) throw new Error("未配置 Immich 共享图库");
 
+  const parsedPageSize = Number.parseInt(container.dataset.pageSize ?? '',10,);
+  const pageSize = Number.isNaN(parsedPageSize) ? 30 : parsedPageSize;
+
+  let nextBucketIndex = 0;
+  let assetBuffer: ImmichAsset[] = [];
+  let isLoading = false;
+
   const gallery = getImmichGallery(sharedUrl);
 
   const album = await gallery.getSharedAlbum();
   if (albumLink) addAlbumName(albumLink, album);
 
   const buckets = await gallery.getTimeBuckets(album.id);
-  const assets = await gallery.getBucketAssets(album.id, buckets[0].timeBucket);
-
-  let nextBucketIndex = 1;
-
-  renderAssets(container, assets);
-  if(loadmore) loadmore.hidden = nextBucketIndex >= buckets.length;
-
   const lightbox = initImagePreview(".photos-list");
+
+  await loadNextPage();
 
   const content = document.querySelector<HTMLElement>(".content");
 
@@ -158,6 +181,9 @@ import { loadRenderers } from "astro:container";
   }
 
   loadmore?.addEventListener("click", () => {
-    loadNextBucket();
+    loadNextPage();
   })
+
+
+
 </script>

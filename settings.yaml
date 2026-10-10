@@ -82,6 +82,12 @@ spec:
           label: "Immich地址"
           placeholder: "https://photos.example.com/s/example"
           help: "若要接入Immich图库请填写Immich共享图库地址，并使用自定义页面模板Immich。Immich服务器需要允许跨域访问"
+        - $formkit: number
+          name: immich_page_size
+          label: "Immich图库页单次加载图片数量"
+          value: 30
+          max: 100
+          min: 10
 
     - group: background
       label: "背景图"
