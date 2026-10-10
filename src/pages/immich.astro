@@ -18,45 +18,45 @@ import "../styles/immich.css";
     </div>
   </Fragment>
 
-  <div th:utext="${singlePage.content.content}" class="card content"></div>
+  <div
+    th:utext="${singlePage.content.content}"
+    class="card content"
+    th:if="${not #strings.isEmpty(singlePage.content.content)}"
+  >
+  </div>
 
   <div class="card immich-album__name"></div>
+
+  <div class="card immich-loading">Loading...</div>
 
   <div
     class="photos-list"
     th:style="|--photos-columns: ${theme.config.photos.columns};|"
     th:attr="data-shared-url=${theme.config.photos.immich_url}"
-  ></div>
-
-
-
+  >
+  </div>
 </Layout>
 
 <script>
   import type { ImmichAlbum } from "../features/immichPhotos";
-import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
+  import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
   import { initImagePreview } from "../features/mediaPreview";
 
-  function addAlbumName(container:HTMLElement,
-    album: ImmichAlbum
-  ){
+  function addAlbumName(container: HTMLElement, album: ImmichAlbum) {
     container.textContent = album.name;
   }
 
-  function renderAssets(
-    container: HTMLElement,
-    assets: ImmichAsset[],
-  ){
+  function renderAssets(container: HTMLElement, assets: ImmichAsset[]) {
     const fragment = document.createDocumentFragment();
 
-    for (const asset of assets){
+    for (const asset of assets) {
       if (!asset.isImage) continue;
 
       const item = document.createElement("div");
       item.className = "photos-list__item";
 
       const link = document.createElement("a");
-      link.className = "glightbox photos-item__link"
+      link.className = "glightbox photos-item__link";
       link.href = asset.previewUrl;
       link.dataset.type = "image";
       link.dataset.downloadUrl = asset.originalUrl;
@@ -67,7 +67,8 @@ import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
       img.decoding = "async";
       img.style.opacity = "0";
       img.addEventListener(
-        "load",()=>{
+        "load",
+        () => {
           img.style.opacity = "1";
         },
         { once: true },
@@ -84,14 +85,14 @@ import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
 
   async function loadNextBucket() {
     const bucket = buckets[nextBucketIndex];
-    
-    if(!bucket){
+
+    if (!bucket) {
       return;
     }
 
-    const assets = await gallery.getBucketAssets(album.id,bucket.timeBucket);
+    const assets = await gallery.getBucketAssets(album.id, bucket.timeBucket);
 
-    renderAssets(container,assets);
+    renderAssets(container, assets);
 
     nextBucketIndex += 1;
   }
@@ -105,18 +106,24 @@ import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
   const gallery = getImmichGallery(sharedUrl);
 
   const album = await gallery.getSharedAlbum();
+  if (albumName) addAlbumName(albumName, album);
+
   const buckets = await gallery.getTimeBuckets(album.id);
-  const assets = await gallery.getBucketAssets(album.id,buckets[0].timeBucket);
+  const assets = await gallery.getBucketAssets(album.id, buckets[0].timeBucket);
 
   let nextBucketIndex = 1;
 
-  if (albumName) addAlbumName(albumName,album);
-  renderAssets(container,assets);
+  renderAssets(container, assets);
 
   initImagePreview(".photos-list");
-  
 
+  const content = document.querySelector<HTMLElement>(".content");
 
-  
-
+  if (
+    content &&
+    !content.textContent?.trim() &&
+    !content.querySelector("img, video, audio, iframe")
+  ) {
+    content.remove();
+  }
 </script>
