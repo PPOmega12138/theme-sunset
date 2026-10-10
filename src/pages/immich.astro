@@ -49,6 +49,7 @@ import "../styles/photos.css"
       link.className = "glightbox photos-item__link"
       link.href = asset.previewUrl;
       link.dataset.type = "image";
+      link.dataset.downloadUrl = asset.originalUrl;
 
       const img = document.createElement("img");
       img.className = "photos-item__img";

@@ -2,6 +2,7 @@ import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.css";
 
 import "../styles/media-preview.css"
+import { treeifyError } from "astro:schema";
 
 declare global {
   interface Window {
@@ -63,7 +64,7 @@ export function initImagePreview(selector = ".js-content") {
     link.append(image);
   });
 
-  GLightbox({
+  const lightbox = GLightbox({
     selector: `${selector} .glightbox`,
     touchNavigation: true,
     loop: true,
@@ -71,6 +72,41 @@ export function initImagePreview(selector = ".js-content") {
     openEffect: "zoom",
     closeEffect: "fade"
   });
+
+  let download: HTMLAnchorElement | null = null;
+
+  lightbox.on("open", () => {
+    const container = document.querySelector<HTMLElement>(".glightbox-container .gcontainer");
+
+    if (!container) return;
+
+    download = document.createElement("a");
+    download.className = "glightbox-download gbtn";
+    download.target = "_blank";
+    download.rel = "noopener";
+    download.setAttribute("aria-label", "download original image");
+    download.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+	    <path d="M0 0h24v24H0z" fill="none" />
+	    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 16v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4m8-13v12m-4.243-3.586L12 15.657l4.243-4.243" />
+    </svg>`;
+
+    container.append(download);
+    });
+  
+  lightbox.on("slide_changed", ({ current }) => {
+    if (!download) return;
+
+    const trigger = current.trigger as HTMLElement | undefined;
+    const downloadUrl = trigger?.dataset.downloadUrl;
+
+    if(downloadUrl){
+      download.href = downloadUrl;
+      download.hidden = false;
+    }else{
+      download.hidden = true;
+      download.removeAttribute("href");
+    }
+  })
 
   initedContainers.add(container);
 }
