@@ -5,7 +5,7 @@ import vue from "@astrojs/vue";
 import Icons from "unplugin-icons/vite";
 
 export default defineConfig({
-  base: "/themes/theme-sunset",
+  base: "/themes/theme-pinboard",
   build: {
     assets: "assets",
     format: "file",

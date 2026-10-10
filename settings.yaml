@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: Setting
 metadata:
-  name: theme-sunset-setting
+  name: theme-pinboard-setting
 spec:
   forms:
     - group: appearance

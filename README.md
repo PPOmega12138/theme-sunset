@@ -1,6 +1,6 @@
-# Halo Theme Sunset
+# Halo Theme Pinboard
 
-以日落为风格的二次元halo主题，正在制作中
+以剪贴板为风格的二次元halo主题，正在制作中
 
 # ToDos
 
