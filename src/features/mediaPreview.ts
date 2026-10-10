@@ -2,7 +2,6 @@ import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.css";
 
 import "../styles/media-preview.css"
-import { treeifyError } from "astro:schema";
 
 declare global {
   interface Window {

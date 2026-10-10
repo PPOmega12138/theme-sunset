@@ -56,6 +56,7 @@ import "../styles/highlightjs.css"
   import { getImmichGallery, type ImmichAsset } from "../features/immichPhotos";
   import { initImagePreview } from "../features/mediaPreview";
   import { initHighlight } from "../features/highlightjs";
+import { loadRenderers } from "astro:container";
 
   initHighlight(".js-content pre > code")
 
@@ -106,6 +107,7 @@ import "../styles/highlightjs.css"
 
   async function loadNextBucket() {
     const bucket = buckets[nextBucketIndex];
+    if(loadmore) loadmore.hidden=true;
 
     if (!bucket) {
       if (loadmore) loadmore.hidden = true;
