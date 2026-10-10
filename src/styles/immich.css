@@ -1,3 +1,14 @@
+.immich-album__link{
+  text-decoration: none;
+  color: var(--ink);
+  
+  transition: all 180ms ease;
+}
+
+.immich-album__link:hover{
+  color: var(--accent);
+}
+
 .immich-album__name{
   font-size: 1.5rem;
   font-weight: 600;

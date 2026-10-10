@@ -26,7 +26,15 @@ import "../styles/highlightjs.css"
   >
   </div>
 
-  <div class="card immich-album__name">Album Loading...</div>
+  <div class="card immich-album__name">
+    <a
+      class="immich-album__link"
+      th:href="${theme.config.photos.immich_url}"
+      target="_blank"
+    >
+      Loading...
+    </a>
+  </div>
 
   <div class="card immich-loading">Images Loading...</div>
 
@@ -116,7 +124,7 @@ import "../styles/highlightjs.css"
 
   const container = document.querySelector<HTMLElement>("[data-shared-url]");
   const sharedUrl = container?.dataset.sharedUrl;
-  const albumName = document.querySelector<HTMLElement>(".immich-album__name");
+  const albumLink = document.querySelector<HTMLElement>(".immich-album__link");
   const loading = document.querySelector<HTMLElement>(".immich-loading");
   const loadmore = document.querySelector<HTMLElement>(".immich-loadmore")
 
@@ -125,7 +133,7 @@ import "../styles/highlightjs.css"
   const gallery = getImmichGallery(sharedUrl);
 
   const album = await gallery.getSharedAlbum();
-  if (albumName) addAlbumName(albumName, album);
+  if (albumLink) addAlbumName(albumLink, album);
 
   const buckets = await gallery.getTimeBuckets(album.id);
   const assets = await gallery.getBucketAssets(album.id, buckets[0].timeBucket);
